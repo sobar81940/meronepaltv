@@ -23,7 +23,7 @@ export interface MigrationEnv {
 }
 
 // Fixed target per migration spec (Option A). The app models also hardcode this.
-const TARGET_DB_NAME = "meronepaltv";
+const TARGET_DB_NAME = "MeroNepalTv";
 
 let loaded = false;
 

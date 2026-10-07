@@ -63,7 +63,7 @@ export async function POST(request: NextRequest) {
     try {
         const body = await request.json();
 
-        if (!body.name) {
+        if (!body.name && !body.nameNe && !body.nameEn) {
             return Response.json(
                 { success: false, error: "Category name is required" },
                 { status: 400 }
@@ -72,6 +72,8 @@ export async function POST(request: NextRequest) {
 
         const category = await CategoryModel.create({
             name: body.name,
+            nameNe: body.nameNe,
+            nameEn: body.nameEn,
             slug: body.slug || undefined,
             description: body.description,
             color: body.color,

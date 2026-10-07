@@ -8,8 +8,6 @@ import {
     Plus,
     Trash2,
     GripVertical,
-    Eye,
-    EyeOff,
     Mail,
     Phone,
     MapPin,
@@ -63,7 +61,7 @@ const defaultFooterSettings: FooterSettings = {
     newsletterPlaceholder: "तपाईंको इमेल ठेगाना",
     newsletterButtonText: "सदस्यता लिनुहोस्",
     bottomBarLinks: [
-        { name: "Site Map", href: "/sitemap", order: 0 },
+        { name: "Site Map", href: "/sitemap.xml", order: 0 },
         { name: "Privacy Policy", href: "/privacy-policy", order: 1 },
         { name: "Terms of Use", href: "/terms-of-service", order: 2 },
     ],
@@ -88,10 +86,6 @@ export default function FooterSettingsPage() {
     const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
     const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set(['about', 'design']));
 
-    useEffect(() => {
-        fetchSettings();
-    }, []);
-
     const fetchSettings = async () => {
         try {
             const res = await fetch('/api/settings');
@@ -110,6 +104,10 @@ export default function FooterSettingsPage() {
             setLoading(false);
         }
     };
+
+    useEffect(() => {
+        fetchSettings();
+    }, []);
 
     const handleSave = async () => {
         setSaving(true);
@@ -438,7 +436,7 @@ export default function FooterSettingsPage() {
                             {/* Background Image */}
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-2">पृष्ठभूमि तस्बिर (वैकल्पिक)</label>
-                                <p className="text-xs text-gray-500 mb-3">अपलोड गरिएमा फुटरको पृष्ठभूमिमा यो तस्बिर देखिन्छ (रङको माथि)। खाली राखे ग्रेडियन्ट मात्र देखिन्छ।</p>
+                                <p className="text-xs text-gray-500 mb-3">अपलोड गरिएमा फुटरको पृष्ठभूमिमा यो तस्बिर देखिन्छ (रङको माथि)। चौडा footer design वा screenshot प्रयोग गर्नुहोस्। खाली राखे ग्रेडियन्ट मात्र देखिन्छ।</p>
                                 <ImageUpload
                                     value={settings.backgroundImage || ""}
                                     onChange={(url) => setSettings(prev => ({ ...prev, backgroundImage: url }))}
@@ -450,27 +448,68 @@ export default function FooterSettingsPage() {
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-2">पूर्वावलोकन</label>
                                 <div
-                                    className="p-6 rounded-xl"
-                                    style={{ backgroundColor: settings.backgroundColor, color: settings.textColor }}
+                                    className="relative min-h-[220px] overflow-hidden rounded-xl p-5 text-white"
+                                    style={{
+                                        backgroundColor: settings.backgroundColor,
+                                        backgroundImage: settings.backgroundImage
+                                            ? `linear-gradient(rgba(0, 35, 80, .42), rgba(0, 35, 80, .68)), url("${settings.backgroundImage}")`
+                                            : undefined,
+                                        backgroundPosition: "center",
+                                        backgroundSize: "cover",
+                                        color: settings.textColor,
+                                    }}
                                 >
-                                    <div className="flex items-center gap-3 mb-3">
-                                        <div
-                                            className="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold"
-                                            style={{ backgroundColor: settings.accentColor }}
-                                        >
-                                            
+                                    <div className="relative z-10 grid grid-cols-1 gap-5 sm:grid-cols-[1.1fr_1fr_1fr_1.4fr]">
+                                        <div>
+                                            <div className="mb-3 flex items-center gap-2">
+                                                {settings.backgroundImage ? (
+                                                    <span className="text-xl font-bold">MeroNepalTv</span>
+                                                ) : (
+                                                    <div
+                                                        className="flex h-10 w-10 items-center justify-center rounded-lg font-bold"
+                                                        style={{ backgroundColor: settings.accentColor }}
+                                                    >
+                                                        Logo
+                                                    </div>
+                                                )}
+                                            </div>
+                                            <div className="flex gap-2">
+                                                {["f", "▶", "𝕏", "◎"].map((icon) => (
+                                                    <span
+                                                        key={icon}
+                                                        className="flex h-7 w-7 items-center justify-center rounded-full text-xs"
+                                                        style={{ backgroundColor: `${settings.accentColor}cc` }}
+                                                    >
+                                                        {icon}
+                                                    </span>
+                                                ))}
+                                            </div>
                                         </div>
-                                        <span className="font-semibold text-white">नमूना शीर्षक</span>
-                                    </div>
-                                    <p className="text-sm">यो एक नमूना टेक्स्ट हो जसले तपाईंको फुटर कस्तो देखिन्छ भनेर देखाउँछ।</p>
-                                    <div className="mt-3 flex gap-2">
-                                        <span
-                                            className="px-3 py-1 rounded text-xs text-white"
-                                            style={{ backgroundColor: settings.accentColor }}
+                                        {["द्रुत लिंकहरू", "विषय", "हाम्रो बारेमा"].map((title) => (
+                                            <div key={title}>
+                                                <h4 className="mb-2 flex items-center gap-2 text-sm font-bold">
+                                                    <span className="h-4 w-1 rounded" style={{ backgroundColor: settings.accentColor }} />
+                                                    {title}
+                                                </h4>
+                                                <p className="text-xs opacity-80">गृहपृष्ठ</p>
+                                                <p className="text-xs opacity-80">समाचार</p>
+                                                <p className="text-xs opacity-80">सम्पर्क</p>
+                                            </div>
+                                        ))}
+                                        <div
+                                            className="rounded-lg border p-3"
+                                            style={{ backgroundColor: "rgba(0, 61, 124, .45)", borderColor: `${settings.accentColor}99` }}
                                         >
-                                            बटन
-                                        </span>
+                                            <p className="mb-2 text-sm font-bold">{settings.newsletterTitle || "न्यूजलेटर"}</p>
+                                            <div className="flex h-7 overflow-hidden rounded bg-white">
+                                                <span className="flex-1 px-2 text-[10px] leading-7 text-gray-400">इमेल ठेगाना</span>
+                                                <span className="px-2 text-[10px] leading-7 text-white" style={{ backgroundColor: settings.accentColor }}>सदस्यता</span>
+                                            </div>
+                                        </div>
                                     </div>
+                                    {(settings.showMountain ?? true) && (
+                                        <div className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-blue-500/40 to-transparent" aria-hidden="true" />
+                                    )}
                                 </div>
                             </div>
                         </div>

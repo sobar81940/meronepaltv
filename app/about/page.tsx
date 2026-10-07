@@ -11,8 +11,8 @@ export async function generateMetadata(): Promise<Metadata> {
         PageModel.findPublishedBySlug("about"),
         SettingsModel.get().catch(() => undefined),
     ]);
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rangamanch.com";
-    const siteName = settings?.siteName || "Rangamanch";
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://MeroNepalTv.com";
+    const siteName = settings?.siteName || "MeroNepalTv";
     const title = page?.metaTitle || page?.title || "हाम्रो बारेमा";
     const description = page?.metaDescription || `${siteName} बारेमा जान्नुहोस् - नेपालको विश्वसनीय समाचार पोर्टल।`;
     const ogImage = settings?.seoSettings?.ogImage || `${siteUrl}/images/og-image.png`;
@@ -46,8 +46,8 @@ export default async function AboutPage() {
         PageModel.findPublishedBySlug("about"),
         SettingsModel.get().catch(() => undefined),
     ]);
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rangamanch.com";
-    const siteName = settings?.siteName || "Rangamanch";
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://MeroNepalTv.com";
+    const siteName = settings?.siteName || "MeroNepalTv";
 
     if (!page) {
         return (
@@ -112,7 +112,7 @@ export default async function AboutPage() {
                                 "@type": "NewsMediaOrganization",
                                 "@id": `${siteUrl}/#organization`,
                                 "name": siteName,
-                                "alternateName": ["rangamanch", "Rangamanch News", "रंगमञ्च"],
+                                "alternateName": ["MeroNepalTv", "MeroNepalTv News", ""],
                                 "url": siteUrl,
                             },
                         }),

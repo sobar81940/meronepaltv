@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: CelebrityPageProps) {
         return { title: "Celebrity Not Found" };
     }
 
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rangamanch.com";
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://MeroNepalTv.com";
     const pageUrl = `${siteUrl}/wiki/${slug}`;
     const description = celebrity.shortBio || celebrity.bio.substring(0, 160);
     const imageUrl = celebrity.imageUrl || `${siteUrl}/images/og-image.png`;
@@ -53,7 +53,7 @@ export async function generateMetadata({ params }: CelebrityPageProps) {
             title: `${celebrity.name} - ${celebrity.title}`,
             description,
             url: pageUrl,
-            siteName: "Rangamanch",
+            siteName: "MeroNepalTv",
             type: "profile",
             locale: "ne_NP",
             images: [{ url: imageUrl, width: 1200, height: 630, alt: celebrity.name }],
@@ -213,7 +213,7 @@ export default async function CelebrityPage({ params }: CelebrityPageProps) {
                             "birthDate": celebrity.birthDate ? new Date(celebrity.birthDate).toISOString().split('T')[0] : undefined,
                             "birthPlace": celebrity.birthPlace ? { "@type": "Place", "name": celebrity.birthPlace } : undefined,
                             "nationality": celebrity.nationality || undefined,
-                            "url": `${process.env.NEXT_PUBLIC_SITE_URL || "https://rangamanch.com"}/wiki/${celebrity.slug}`,
+                            "url": `${process.env.NEXT_PUBLIC_SITE_URL || "https://MeroNepalTv.com"}/wiki/${celebrity.slug}`,
                             "sameAs": [
                                 celebrity.socialLinks?.facebook,
                                 celebrity.socialLinks?.twitter,
@@ -232,9 +232,9 @@ export default async function CelebrityPage({ params }: CelebrityPageProps) {
                             "@context": "https://schema.org",
                             "@type": "BreadcrumbList",
                             "itemListElement": [
-                                { "@type": "ListItem", "position": 1, "name": "गृहपृष्ठ", "item": process.env.NEXT_PUBLIC_SITE_URL || "https://rangamanch.com" },
-                                { "@type": "ListItem", "position": 2, "name": "विकि", "item": `${process.env.NEXT_PUBLIC_SITE_URL || "https://rangamanch.com"}/wiki` },
-                                { "@type": "ListItem", "position": 3, "name": celebrity.name, "item": `${process.env.NEXT_PUBLIC_SITE_URL || "https://rangamanch.com"}/wiki/${celebrity.slug}` },
+                                { "@type": "ListItem", "position": 1, "name": "गृहपृष्ठ", "item": process.env.NEXT_PUBLIC_SITE_URL || "https://MeroNepalTv.com" },
+                                { "@type": "ListItem", "position": 2, "name": "विकि", "item": `${process.env.NEXT_PUBLIC_SITE_URL || "https://MeroNepalTv.com"}/wiki` },
+                                { "@type": "ListItem", "position": 3, "name": celebrity.name, "item": `${process.env.NEXT_PUBLIC_SITE_URL || "https://MeroNepalTv.com"}/wiki/${celebrity.slug}` },
                             ],
                         }),
                     }}

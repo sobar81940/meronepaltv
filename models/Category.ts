@@ -8,6 +8,8 @@ const DB_NAME = "meronepaltv";
 export interface Category {
     _id?: ObjectId;
     name: string;
+    nameNe?: string;
+    nameEn?: string;
     slug: string;
     description?: string;
     color?: string;
@@ -22,7 +24,9 @@ export interface CategoryWithChildren extends WithId<Category> {
 }
 
 export interface CreateCategoryInput {
-    name: string;
+    name?: string;
+    nameNe?: string;
+    nameEn?: string;
     slug?: string; // Optional custom slug - if not provided, auto-generated
     description?: string;
     color?: string;
@@ -86,10 +90,13 @@ export const CategoryModel = {
     async create(input: CreateCategoryInput): Promise<WithId<Category>> {
         const collection = await getCollection();
         const now = new Date();
+        const name = input.nameNe || input.nameEn || input.name || "";
 
         const category: Omit<Category, "_id"> = {
-            name: input.name,
-            slug: input.slug || generateSlug(input.name),
+            name,
+            nameNe: input.nameNe || (input.name && /[^\x00-\x7F]/.test(input.name) ? input.name : undefined),
+            nameEn: input.nameEn || (input.name && !/[^\x00-\x7F]/.test(input.name) ? input.name : undefined),
+            slug: input.slug || generateSlug(name),
             description: input.description,
             color: input.color || "#3B82F6",
             parentId: input.parentId ? new ObjectId(input.parentId) : null,
@@ -110,7 +117,9 @@ export const CategoryModel = {
 
         // Build update data, converting parentId string to ObjectId
         const updateData: Partial<Category> = {
-            name: input.name,
+            name: input.nameNe || input.nameEn || input.name,
+            nameNe: input.nameNe,
+            nameEn: input.nameEn,
             description: input.description,
             color: input.color,
             updatedAt: new Date(),
@@ -124,8 +133,8 @@ export const CategoryModel = {
         // Use custom slug if provided, otherwise generate from name if name changed
         if (input.slug) {
             updateData.slug = input.slug;
-        } else if (input.name) {
-            updateData.slug = generateSlug(input.name);
+        } else if (input.nameNe || input.nameEn || input.name) {
+            updateData.slug = generateSlug(input.nameNe || input.nameEn || input.name || "");
         }
 
         // Remove undefined values

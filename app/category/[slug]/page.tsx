@@ -45,7 +45,7 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
     const { slug } = await params;
     const category = await CategoryModel.findBySlug(slug);
     if (!category) return { title: "Category Not Found" };
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rangamanch.com";
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://MeroNepalTv.com";
     const description = category.description && category.description !== category.name
         ? stripHtmlTags(category.description)
         : `${category.name} - ताजा समाचार, अपडेट र जानकारी`;
@@ -53,7 +53,7 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
         title: category.name,
         description,
         alternates: { canonical: `${siteUrl}/category/${slug}` },
-        openGraph: { title: category.name, description, url: `${siteUrl}/category/${slug}`, siteName: "Rangamanch", type: "website", locale: "ne_NP" },
+        openGraph: { title: category.name, description, url: `${siteUrl}/category/${slug}`, siteName: "MeroNepalTv", type: "website", locale: "ne_NP" },
     };
 }
 
@@ -79,7 +79,7 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
     ]);
     const posts = paginatedData.posts;
     const totalCount = paginatedData.total;
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rangamanch.com";
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://MeroNepalTv.com";
     const filterHref = (filter?: string, page?: number) => {
         const params = new URLSearchParams();
         if (filter) params.set("category", filter);

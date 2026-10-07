@@ -5,19 +5,19 @@ import PostModel from "@/models/Post";
 import { PROVINCES } from "@/lib/types";
 import type { Metadata } from "next";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://rangamanch.com";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://MeroNepalTv.com";
 
 export const metadata: Metadata = {
     title: "प्रदेश समाचार",
-    description: "Rangamanch मा कोशी, मधेश, बागमती, गण्डकी, लुम्बिनी, कर्णाली र सुदूरपश्चिमका ताजा प्रदेश समाचार पढ्नुहोस्।",
+    description: "MeroNepalTv मा कोशी, मधेश, बागमती, गण्डकी, लुम्बिनी, कर्णाली र सुदूरपश्चिमका ताजा प्रदेश समाचार पढ्नुहोस्।",
     alternates: { canonical: `${SITE_URL}/pradesh` },
     openGraph: {
-        title: "प्रदेश समाचार | Rangamanch",
+        title: "प्रदेश समाचार | MeroNepalTv",
         description: "नेपालका सातै प्रदेशका ताजा समाचार र अपडेट।",
         url: `${SITE_URL}/pradesh`,
         type: "website",
         locale: "ne_NP",
-        siteName: "Rangamanch",
+        siteName: "MeroNepalTv",
     },
 };
 

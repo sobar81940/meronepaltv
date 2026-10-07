@@ -28,7 +28,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
     const category = post?.category || 'News';
     const date = post?.createdAt ? new Date(post.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
     const imageUrl = post?.imageUrl;
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://rangamanch.com';
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://MeroNepalTv.com';
 
     // Load fonts (optional, using system fonts for simplicity in this example)
 
@@ -118,7 +118,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
                                     }}
                                 >
                                     <span style={{ color: '#E53E3E', marginRight: '8px', fontSize: 48 }}>R</span>
-                                    RANGAMANCH
+                                    MeroNepalTv
                                 </div>
                             </div>
                         </div>

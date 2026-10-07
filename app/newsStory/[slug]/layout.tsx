@@ -7,7 +7,7 @@ interface NewsStoryLayoutProps {
 
 export async function generateMetadata({ params }: NewsStoryLayoutProps): Promise<Metadata> {
     const { slug } = await params;
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rangamanch.com";
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://MeroNepalTv.com";
 
     return {
         robots: { index: false, follow: true },

@@ -101,7 +101,7 @@ export async function GET(req: NextRequest) {
                                 }}
                             >
                                 <span style={{ color: '#E53E3E', marginRight: '8px', fontSize: 48 }}>R</span>
-                                RANGAMANCH
+                                MeroNepalTv
                             </div>
                         </div>
                     </div>

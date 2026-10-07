@@ -61,7 +61,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         };
     }
 
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rangamanch.com";
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://MeroNepalTv.com";
     const postUrl = `${siteUrl}/post/${post.slug}`;
     const description = stripHtmlTags(post.excerpt || post.title || "");
     const imageUrl = post.imageUrl
@@ -84,7 +84,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
             title: post.title,
             description: description,
             url: postUrl,
-            siteName: "Rangamanch",
+            siteName: "MeroNepalTv",
             publishedTime: new Date(post.createdAt).toISOString(),
             modifiedTime: post.updatedAt ? new Date(post.updatedAt).toISOString() : undefined,
             authors: post.author ? [post.author] : undefined,
@@ -312,7 +312,7 @@ export default async function PostDetailPage({ params }: PageProps) {
         ? [...displayPost.contentBlocks].sort((a, b) => a.order - b.order)
         : [];
 
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rangamanch.com";
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://MeroNepalTv.com";
     const shareUrl = `${siteUrl}/post/${displayPost.slug}`;
 
     return (
@@ -339,7 +339,7 @@ export default async function PostDetailPage({ params }: PageProps) {
                             "publisher": {
                             "@type": "NewsMediaOrganization",
                             "@id": `${siteUrl}/#organization`,
-                            "name": "Rangamanch",
+                            "name": "MeroNepalTv",
                             "url": siteUrl,
                             "logo": {
                                 "@type": "ImageObject",

@@ -29,6 +29,8 @@ export async function GET() {
                 return {
                     _id: c._id.toString(),
                     name: c.name,
+                    nameNe: c.nameNe || c.name,
+                    nameEn: c.nameEn || c.name,
                     slug: c.slug,
                     color: c.color || "#3B82F6",
                     description: c.description || null,

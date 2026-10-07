@@ -132,7 +132,7 @@ export async function GET(request: NextRequest) {
 
             return {
                 site: {
-                    name: settings?.siteName || "Rangamanch",
+                    name: settings?.siteName || "MeroNepalTv",
                     tagline: settings?.siteTagline || "",
                     logoUrl: settings?.logoUrl || "",
                     logoText: settings?.logoText || "",

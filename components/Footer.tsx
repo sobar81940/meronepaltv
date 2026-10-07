@@ -160,7 +160,7 @@ const InlineNewsletterForm = ({ accentColor, placeholder, buttonText }: { accent
 
 const defaultColumns: FooterColumn[] = [
     {
-        title: "द्रुत लिंकहरू",
+        title: "छिटो लिंक",
         order: 0,
         links: [
             { name: "होमपेज", href: "/", order: 0 },
@@ -170,31 +170,37 @@ const defaultColumns: FooterColumn[] = [
         ]
     },
     {
-        title: "कम्पनी",
+        title: "विषय",
         order: 1,
         links: [
-            { name: "हाम्रो बारेमा", href: "/about", order: 0 },
-            { name: "सम्पर्क", href: "/contact", order: 1 },
-            { name: "विज्ञापन", href: "/advertise", order: 2 },
-            { name: "करियर", href: "/careers", order: 3 },
+            { name: "मनोरञ्जन", href: "/category/entertainment", order: 0 },
+            { name: "भिडियो", href: "/shorts", order: 1 },
+            { name: "विचार", href: "/category/opinion", order: 2 },
+            { name: "जीवनशैली", href: "/category/lifestyle", order: 3 },
+            { name: "खेलकुद", href: "/category/sports", order: 4 },
         ]
     },
     {
-        title: "कानुनी",
+        title: "हाम्रो बारेमा",
         order: 2,
         links: [
-            { name: "गोपनीयता नीति", href: "/privacy-policy", order: 0 },
-            { name: "सेवाका शर्तहरू", href: "/terms-of-service", order: 1 },
-            { name: "कुकी नीति", href: "/cookies", order: 2 },
+            { name: "सम्पर्क", href: "/contact", order: 0 },
+            { name: "विज्ञापन", href: "/advertise", order: 1 },
+            { name: "गोपनीयता नीति", href: "/privacy-policy", order: 2 },
+            { name: "प्रयोगका सर्तहरू", href: "/terms-of-service", order: 3 },
+            { name: "RSS", href: "/sitemap.xml", order: 4 },
         ]
     },
 ];
 
 const defaultBottomBarLinks: FooterLink[] = [
-    { name: "Site Map", href: "/sitemap", order: 0 },
+    { name: "Site Map", href: "/sitemap.xml", order: 0 },
     { name: "Privacy Policy", href: "/privacy-policy", order: 1 },
     { name: "Terms of Use", href: "/terms-of-service", order: 2 },
 ];
+
+const normalizeFooterHref = (href: string): string =>
+    href === "/sitemap" ? "/sitemap.xml" : href;
 
 export default function Footer({ settings, siteName, logoUrl, logoText }: FooterProps) {
     const [isMounted, setIsMounted] = useState(false);
@@ -283,17 +289,10 @@ export default function Footer({ settings, siteName, logoUrl, logoText }: Footer
         );
     }
 
-    // Modern/Standard (default) — redesigned to match the reference (dark navy, 6 columns)
-    // The new design is the default return so the live site shows it regardless of
-    // whether settings.layout is 'standard' or 'modern'. Only 'minimal' keeps its own layout.
-    // Render all enabled link columns, up to the 3 slots the 6-fr grid reserves.
+    // Modern/Standard (default) — compact four-panel layout matching the site design.
+    // Only the minimal layout keeps its separate presentation.
     const linkColumns = columns.slice().sort((a, b) => a.order - b.order).slice(0, 3);
-    const linkCount = linkColumns.length;
-
-    // Desktop (xl) grid template: brand 1.2fr, company 1.4fr, one 0.8fr per link column,
-    // newsletter 1.5fr. Driven by a CSS variable so fewer/more than 3 link columns never
-    // leave a visibly empty slot. Consumed only at xl via the arbitrary class below.
-    const desktopGridTemplate = `1.2fr 1.4fr ${"0.8fr ".repeat(linkCount)}1.5fr`;
+    const publicLinkColumns = linkColumns.length >= 3 ? linkColumns : defaultColumns;
 
     const bottomBarLinks = (settings.bottomBarLinks && settings.bottomBarLinks.length > 0
         ? settings.bottomBarLinks
@@ -311,13 +310,13 @@ export default function Footer({ settings, siteName, logoUrl, logoText }: Footer
     const secondaryTxt = "rgba(255,255,255,0.78)";
     const linkTxt = "rgba(255,255,255,0.75)";
     // Static literal so Tailwind JIT detects the arbitrary classes at build time.
-    const sepClass = "xl:border-l xl:border-[rgba(0,145,255,0.28)] xl:pl-10";
+    const sepClass = "lg:border-l lg:border-[rgba(0,145,255,0.28)] lg:pl-4 xl:pl-8";
 
-    const horizontalPadding = "px-4 sm:px-6 lg:px-10 xl:px-14";
+    const horizontalPadding = "px-5 sm:px-8 lg:px-12 xl:px-16";
 
     return (
         <footer
-            className="relative overflow-hidden bg-gradient-to-b from-[#003f80] via-[#00356f] to-[#002750]"
+            className="relative overflow-hidden bg-[#033d7b]"
             style={{ backgroundColor: settings.backgroundColor, color: settings.textColor }}
         >
             {/* Optional admin-uploaded background image (sits over the gradient, behind content) */}
@@ -329,31 +328,30 @@ export default function Footer({ settings, siteName, logoUrl, logoText }: Footer
                 />
             )}
 
-            {/* Decorative mountain graphic — full-width lower strip (desktop only) */}
+            {/* Dark overlay above the artwork, below the content, keeps text readable */}
+            <div
+                className="absolute inset-0 pointer-events-none z-[1]"
+                style={{ background: "linear-gradient(to bottom, rgba(0,31,79,0.15), rgba(0,24,61,0.48))" }}
+                aria-hidden="true"
+            />
+
+            {/* Top accent line */}
+            <div className="absolute top-0 left-0 w-full h-[3px] z-10" style={{ backgroundColor: settings.accentColor }} />
+
+            {/* The reference places the mountain artwork behind the lower part of the main panel. */}
             {(settings.showMountain ?? true) && (
                 <img
                     src="/Red%20and%20White%20Low-Poly%20Mountain%20Range.png"
                     alt=""
                     aria-hidden="true"
-                    className="hidden lg:block absolute bottom-0 left-0 w-full max-h-[150px] object-cover object-bottom pointer-events-none select-none opacity-90 z-0"
+                    className="pointer-events-none absolute bottom-[70px] left-0 z-0 h-[145px] w-full object-fill opacity-90"
                 />
             )}
 
-            {/* Dark overlay above the artwork, below the content, keeps text readable */}
-            <div
-                className="absolute inset-0 pointer-events-none z-[1]"
-                style={{ background: "linear-gradient(to bottom, rgba(0,40,90,0.15), rgba(0,30,70,0.35))" }}
-                aria-hidden="true"
-            />
-
-            {/* Top accent line */}
-            <div className="absolute top-0 left-0 w-full h-1 z-10" style={{ background: `linear-gradient(90deg, ${settings.accentColor}, ${settings.accentColor}88, ${settings.accentColor}44, transparent)` }} />
-
             {/* Main Footer Content */}
-            <div className={`max-w-[1500px] w-full mx-auto ${horizontalPadding} pt-14 lg:pt-[60px] pb-12 lg:pb-14 relative z-10`}>
+            <div className={`relative z-10 mx-auto w-full max-w-[1920px] ${horizontalPadding} pb-28 pt-10 lg:pb-36 lg:pt-14`}>
                 <div
-                    className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10 lg:gap-x-10 xl:[grid-template-columns:var(--footer-xl-cols)]"
-                    style={{ ['--footer-xl-cols' as string]: desktopGridTemplate }}
+                    className="grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-6 lg:gap-x-4 xl:gap-x-8"
                 >
                     {/* COLUMN 1 — Brand */}
                     <div>
@@ -364,7 +362,7 @@ export default function Footer({ settings, siteName, logoUrl, logoText }: Footer
                                     alt={siteName}
                                     width={210}
                                     height={70}
-                                    className="h-auto w-[180px] xl:w-[210px]"
+                                    className="h-auto w-[150px] xl:w-[190px]"
                                     style={{ height: 'auto' }}
                                 />
                             ) : logoText ? (
@@ -378,6 +376,9 @@ export default function Footer({ settings, siteName, logoUrl, logoText }: Footer
                                     {logoText}
                                 </div>
                             ) : null}
+                            <p className="mt-3 max-w-[190px] text-xs leading-5 xl:text-sm" style={{ color: secondaryTxt }}>
+                                सत्य, तथ्य र तपाईंसँग
+                            </p>
                         </div>
 
                         {/* Social Links — translucent blue rounded squares (44px) */}
@@ -402,13 +403,13 @@ export default function Footer({ settings, siteName, logoUrl, logoText }: Footer
 
                     {/* COLUMN 2 — Company info */}
                     <div className={sepClass}>
-                        <h3 className="text-[24px] xl:text-[26px] font-bold text-white mb-5 leading-snug">
+                        <h3 className="mb-5 text-[18px] font-bold leading-snug text-white xl:text-[22px]">
                             {settings.companyName || siteName}
                         </h3>
                         {settings.showContact && (
                             <ul className="space-y-3.5">
                                 {settings.contactAddress && (
-                                    <li className="flex items-start gap-2.5 text-[16px] leading-[1.7] break-words" style={{ color: secondaryTxt }}>
+                                    <li className="flex items-start gap-2 text-[13px] leading-6 break-words xl:text-[15px]" style={{ color: secondaryTxt }}>
                                         <MapPin className="w-4 h-4 mt-1 shrink-0" style={{ color: settings.accentColor }} aria-hidden="true" />
                                         <span>{settings.contactAddress}</span>
                                     </li>
@@ -417,7 +418,7 @@ export default function Footer({ settings, siteName, logoUrl, logoText }: Footer
                                     <li>
                                         <a
                                             href={`tel:${settings.contactPhone}`}
-                                            className="flex items-start gap-2.5 text-[16px] leading-[1.7] hover:text-white transition-colors"
+                                            className="flex items-start gap-2 text-[13px] leading-6 hover:text-white transition-colors xl:text-[15px]"
                                             style={{ color: secondaryTxt }}
                                         >
                                             <Phone className="w-4 h-4 mt-1 shrink-0" style={{ color: settings.accentColor }} aria-hidden="true" />
@@ -426,25 +427,25 @@ export default function Footer({ settings, siteName, logoUrl, logoText }: Footer
                                     </li>
                                 )}
                                 {settings.registrationNumber && (
-                                    <li className="flex items-start gap-2.5 text-[16px] leading-[1.7] break-words" style={{ color: secondaryTxt }}>
+                                    <li className="flex items-start gap-2 text-[13px] leading-6 break-words xl:text-[15px]" style={{ color: secondaryTxt }}>
                                         <FileText className="w-4 h-4 mt-1 shrink-0" style={{ color: settings.accentColor }} aria-hidden="true" />
                                         <span>सूचना विभाग दर्ता नं: {settings.registrationNumber}</span>
                                     </li>
                                 )}
                                 {settings.pressCouncilNumber && (
-                                    <li className="flex items-start gap-2.5 text-[16px] leading-[1.7] break-words" style={{ color: secondaryTxt }}>
+                                    <li className="flex items-start gap-2 text-[13px] leading-6 break-words xl:text-[15px]" style={{ color: secondaryTxt }}>
                                         <FileText className="w-4 h-4 mt-1 shrink-0" style={{ color: settings.accentColor }} aria-hidden="true" />
                                         <span>प्रेस काउन्सिल दर्ता नं: {settings.pressCouncilNumber}</span>
                                     </li>
                                 )}
                                 {settings.operatorName && (
-                                    <li className="flex items-start gap-2.5 text-[16px] leading-[1.7] break-words" style={{ color: secondaryTxt }}>
+                                    <li className="flex items-start gap-2 text-[13px] leading-6 break-words xl:text-[15px]" style={{ color: secondaryTxt }}>
                                         <UserCog className="w-4 h-4 mt-1 shrink-0" style={{ color: settings.accentColor }} aria-hidden="true" />
                                         <span>सञ्चालक: {settings.operatorName}</span>
                                     </li>
                                 )}
                                 {settings.editorName && (
-                                    <li className="flex items-start gap-2.5 text-[16px] leading-[1.7] break-words" style={{ color: secondaryTxt }}>
+                                    <li className="flex items-start gap-2 text-[13px] leading-6 break-words xl:text-[15px]" style={{ color: secondaryTxt }}>
                                         <PenLine className="w-4 h-4 mt-1 shrink-0" style={{ color: settings.accentColor }} aria-hidden="true" />
                                         <span>सम्पादक: {settings.editorName}</span>
                                     </li>
@@ -453,14 +454,14 @@ export default function Footer({ settings, siteName, logoUrl, logoText }: Footer
                         )}
                     </div>
 
-                    {/* COLUMNS 3,4,5 — Link columns (all enabled, up to 3 slots) */}
-                    {linkColumns.map((column, columnIndex) => (
+                    {/* COLUMNS 3,4,5 — Separate link columns matching the reference. */}
+                    {publicLinkColumns.map((column, columnIndex) => (
                         <nav
                             key={`modern-column-${columnIndex}-${column.title}`}
                             aria-label={column.title}
-                            className={columnIndex === 0 ? sepClass : undefined}
+                            className={sepClass}
                         >
-                            <h3 className="flex items-center gap-2.5 text-[21px] xl:text-[22px] font-bold text-white leading-tight mb-4">
+                            <h3 className="mb-4 flex items-center gap-2 text-[16px] font-bold leading-tight text-white xl:text-[19px]">
                                 <span
                                     className="inline-block w-1 h-[30px] rounded-[4px] shrink-0"
                                     style={{ backgroundColor: settings.accentColor }}
@@ -472,8 +473,8 @@ export default function Footer({ settings, siteName, logoUrl, logoText }: Footer
                                 {column.links.slice().sort((a, b) => a.order - b.order).map((link, linkIndex) => (
                                     <li key={`modern-link-${columnIndex}-${linkIndex}-${link.href}`}>
                                         <Link
-                                            href={link.href}
-                                            className="group inline-flex items-center gap-1 text-[16px] xl:text-[17px] transition-all duration-200 hover:text-white hover:translate-x-1 focus-visible:text-white focus-visible:outline-none"
+                                            href={normalizeFooterHref(link.href)}
+                                            className="group inline-flex items-center gap-1 text-[13px] transition-all duration-200 hover:translate-x-1 hover:text-white focus-visible:text-white focus-visible:outline-none xl:text-[15px]"
                                             style={{ color: linkTxt }}
                                         >
                                             <ChevronRight className="w-3.5 h-3.5 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-200" style={{ color: settings.accentColor }} aria-hidden="true" />
@@ -487,9 +488,9 @@ export default function Footer({ settings, siteName, logoUrl, logoText }: Footer
 
                     {/* COLUMN 6 — Newsletter */}
                     {settings.showNewsletter && (
-                        <div className={`md:col-span-2 xl:col-span-1 ${sepClass}`}>
+                        <div className={`md:col-span-2 lg:col-span-1 ${sepClass}`}>
                             <div
-                                className="w-full max-w-[380px] rounded-[15px] p-6 xl:p-7"
+                                className="w-full max-w-[390px] rounded-[15px] p-5 xl:p-6"
                                 style={{ backgroundColor: "rgba(0,61,124,0.45)", border: "1px solid rgba(0,145,255,0.45)" }}
                             >
                                 <div className="flex items-center gap-3 mb-3">
@@ -499,10 +500,10 @@ export default function Footer({ settings, siteName, logoUrl, logoText }: Footer
                                     >
                                         <Mail className="w-5 h-5" aria-hidden="true" />
                                     </span>
-                                    <h3 className="text-[21px] xl:text-[22px] font-bold text-white leading-tight">{settings.newsletterTitle}</h3>
+                                    <h3 className="text-[17px] font-bold leading-tight text-white xl:text-[20px]">{settings.newsletterTitle}</h3>
                                 </div>
                                 {settings.newsletterDescription && (
-                                    <p className="text-[16px] leading-[1.7] mb-5 line-clamp-2" style={{ color: "rgba(255,255,255,0.85)" }}>
+                                    <p className="mb-5 line-clamp-3 text-[13px] leading-5 xl:text-[15px]" style={{ color: "rgba(255,255,255,0.85)" }}>
                                         {settings.newsletterDescription}
                                     </p>
                                 )}
@@ -521,7 +522,7 @@ export default function Footer({ settings, siteName, logoUrl, logoText }: Footer
             {/* Bottom Bar */}
             <div
                 className="border-t relative z-10"
-                style={{ borderColor: "rgba(0,145,255,0.2)", backgroundColor: "#00234a" }}
+                style={{ borderColor: "rgba(0,145,255,0.28)", backgroundColor: "#022d5d" }}
             >
                 <div className={`max-w-[1500px] mx-auto ${horizontalPadding} min-h-[72px] flex items-center py-4`}>
                     <div className="w-full flex flex-col items-center text-center gap-2 md:grid md:[grid-template-columns:1fr_auto_1fr] md:items-center md:gap-3 md:text-left">
@@ -537,7 +538,7 @@ export default function Footer({ settings, siteName, logoUrl, logoText }: Footer
                                     {index > 0 && (
                                         <span className="text-[15px]" style={{ color: linkTxt }} aria-hidden="true">|</span>
                                     )}
-                                    <Link href={link.href} className="hover:text-white focus-visible:text-white transition-colors" style={{ color: linkTxt }}>{link.name}</Link>
+                                    <Link href={normalizeFooterHref(link.href)} className="hover:text-white focus-visible:text-white transition-colors" style={{ color: linkTxt }}>{link.name}</Link>
                                 </span>
                             ))}
                         </nav>

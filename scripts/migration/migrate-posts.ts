@@ -1,6 +1,6 @@
 /**
  * Core posts migration: MySQL `news` (parsed from the SQL dump) -> MongoDB
- * `meronepaltv.posts`, with images uploaded to Cloudflare R2.
+ * `MeroNepalTv.posts`, with images uploaded to Cloudflare R2.
  *
  * Design goals (per migration spec, Option A):
  *   - idempotent: upsert keyed on legacyId (= news.id); rerun never duplicates
@@ -43,7 +43,7 @@ const BATCH_SIZE = 100;
 export interface MigrationOptions {
     dryRun: boolean;
     env: MigrationEnv;
-    db: Db; // meronepaltv
+    db: Db; // MeroNepalTv
     limit?: number; // optional cap for testing
 }
 
@@ -156,7 +156,7 @@ export class PostsMigrator {
         this.r2 = new MigrationR2(opts.env);
         const root = projectRoot();
         this.uploadsDir = join(root, "backup", "uploads");
-        this.dumpPath = join(root, "backup", "mero_meronepaltv.sql");
+        this.dumpPath = join(root, "backup", "mero_MeroNepalTv.sql");
     }
 
     get sqlDumpPath(): string {

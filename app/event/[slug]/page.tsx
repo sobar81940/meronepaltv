@@ -25,7 +25,7 @@ export async function generateMetadata(props: EventDetailPageProps): Promise<Met
     const event = await EventModel.findBySlug(slug);
     if (!event) return {};
 
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rangamanch.com";
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://MeroNepalTv.com";
     const eventUrl = `${siteUrl}/event/${slug}`;
 
     const description = event.shortDescription || event.description.substring(0, 160);

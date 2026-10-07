@@ -45,10 +45,10 @@ async function uploadOGImages() {
     // Define the images to upload
     const images = [
         {
-            localPath: "/Users/aasish/.gemini/antigravity/brain/fd9dfb7d-9db2-424f-9c99-0a8dec3f2496/og_image_rangamanch_1771042557766.png",
-            filename: "og-image-rangamanch.png",
-            key: "news-portal/og-images/og-image-rangamanch.png",
-            description: "Rangamanch News Portal OG Image",
+            localPath: "/Users/aasish/.gemini/antigravity/brain/fd9dfb7d-9db2-424f-9c99-0a8dec3f2496/og_image_MeroNepalTv_1771042557766.png",
+            filename: "og-image-MeroNepalTv.png",
+            key: "news-portal/og-images/og-image-MeroNepalTv.png",
+            description: "MeroNepalTv News Portal OG Image",
         },
         {
             localPath: "/Users/aasish/.gemini/antigravity/brain/fd9dfb7d-9db2-424f-9c99-0a8dec3f2496/tech_og_image_1771042940488.png",

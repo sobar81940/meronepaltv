@@ -26,7 +26,7 @@ function getEnvVar(name: string): string | undefined {
 }
 
 const MONGODB_URI = getEnvVar("MONGODB_URI");
-const DB_NAME = "meronepaltv";
+const DB_NAME = "MeroNepalTv";
 
 async function fixAdminPermissions() {
     if (!MONGODB_URI) {

@@ -11,8 +11,8 @@ export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
     const settings = await SettingsModel.get().catch(() => undefined);
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rangamanch.com";
-    const siteName = settings?.siteName || "Rangamanch";
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://MeroNepalTv.com";
+    const siteName = settings?.siteName || "MeroNepalTv";
     const ogImage = settings?.seoSettings?.ogImage || `${siteUrl}/images/og-image.png`;
     const title = `सेलिब्रिटी जीवनी | ${siteName}`;
     const description = "नेपाली सेलिब्रिटीहरूको जीवनी, उपलब्धि र कार्यहरूको विस्तृत जानकारी। अभिनेता, गायक, खेलाडी, राजनीतिज्ञ र अन्य प्रसिद्ध व्यक्तित्वहरूको प्रोफाइल।";

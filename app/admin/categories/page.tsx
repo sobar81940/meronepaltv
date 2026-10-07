@@ -6,6 +6,8 @@ import { Trash2, Edit, Plus, X, Check, ChevronRight, ChevronDown } from "lucide-
 interface Category {
     _id: string;
     name: string;
+    nameNe?: string;
+    nameEn?: string;
     slug: string;
     description?: string;
     color: string;
@@ -21,7 +23,8 @@ export default function CategoriesPage() {
     const [editingId, setEditingId] = useState<string | null>(null);
     const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
     const [form, setForm] = useState({
-        name: "",
+        nameNe: "",
+        nameEn: "",
         slug: "",
         description: "",
         color: "#3B82F6",
@@ -66,6 +69,10 @@ export default function CategoriesPage() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        if (!form.nameNe.trim() && !form.nameEn.trim()) {
+            window.alert("Add a Nepali or English category name.");
+            return;
+        }
         try {
             const url = editingId ? `/api/categories/${editingId}` : "/api/categories";
             const method = editingId ? "PUT" : "POST";
@@ -75,6 +82,7 @@ export default function CategoriesPage() {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     ...form,
+                    name: form.nameNe || form.nameEn,
                     parentId: form.parentId || null,
                 }),
             });
@@ -90,7 +98,8 @@ export default function CategoriesPage() {
 
     const handleEdit = (category: Category) => {
         setForm({
-            name: category.name,
+            nameNe: category.nameNe || category.name,
+            nameEn: category.nameEn || "",
             slug: category.slug,
             description: category.description || "",
             color: category.color,
@@ -111,7 +120,7 @@ export default function CategoriesPage() {
     };
 
     const resetForm = () => {
-        setForm({ name: "", slug: "", description: "", color: "#3B82F6", parentId: "" });
+        setForm({ nameNe: "", nameEn: "", slug: "", description: "", color: "#3B82F6", parentId: "" });
         setEditingId(null);
         setShowForm(false);
     };
@@ -163,7 +172,10 @@ export default function CategoriesPage() {
                     />
                     <div className="flex-1 min-w-0">
                         <h3 className="text-white font-medium flex items-center gap-2">
-                            {category.name}
+                            {category.nameNe || category.name}
+                            {category.nameEn && (
+                                <span className="text-slate-400 font-normal"> / {category.nameEn}</span>
+                            )}
                             {hasChildren && (
                                 <span className="text-xs bg-slate-700 text-slate-400 px-2 py-0.5 rounded-full">
                                     {category.children!.length} subcategories
@@ -257,15 +269,29 @@ export default function CategoriesPage() {
                         <form onSubmit={handleSubmit} className="space-y-4">
                             <div>
                                 <label className="block text-sm font-medium text-slate-300 mb-2">
-                                    Name *
+                                    Nepali Name
                                 </label>
                                 <input
                                     type="text"
-                                    value={form.name}
-                                    onChange={(e) => setForm({ ...form, name: e.target.value })}
+                                    value={form.nameNe}
+                                    onChange={(e) => setForm({ ...form, nameNe: e.target.value })}
                                     className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    required
                                 />
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium text-slate-300 mb-2">
+                                    English Name
+                                </label>
+                                <input
+                                    type="text"
+                                    value={form.nameEn}
+                                    onChange={(e) => setForm({ ...form, nameEn: e.target.value })}
+                                    className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                                <p className="text-xs text-slate-500 mt-1">
+                                    Add at least one language name.
+                                </p>
                             </div>
 
                             <div>
@@ -369,4 +395,3 @@ export default function CategoriesPage() {
         </div>
     );
 }
-

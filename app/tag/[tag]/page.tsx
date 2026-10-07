@@ -203,21 +203,21 @@ export default async function TagPage({ params }: TagPageProps) {
 export async function generateMetadata({ params }: TagPageProps) {
     const { tag } = await params;
     const decodedTag = decodeURIComponent(tag);
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rangamanch.com";
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://MeroNepalTv.com";
     const ogImage = `${siteUrl}/images/og-image.png`;
 
     return {
         title: `#${decodedTag}`,
-        description: `"${decodedTag}" ट्यागसँग सम्बन्धित नेपाली समाचार, मनोरञ्जन र अपडेटहरू Rangamanch मा पढ्नुहोस्।`,
+        description: `"${decodedTag}" ट्यागसँग सम्बन्धित नेपाली समाचार, मनोरञ्जन र अपडेटहरू MeroNepalTv मा पढ्नुहोस्।`,
         robots: { index: false, follow: true },
         alternates: {
             canonical: `${siteUrl}/tag/${encodeURIComponent(decodedTag)}`,
         },
         openGraph: {
             title: `#${decodedTag}`,
-            description: `"${decodedTag}" ट्यागसँग सम्बन्धित नेपाली समाचार, मनोरञ्जन र अपडेटहरू Rangamanch मा पढ्नुहोस्।`,
+            description: `"${decodedTag}" ट्यागसँग सम्बन्धित नेपाली समाचार, मनोरञ्जन र अपडेटहरू MeroNepalTv मा पढ्नुहोस्।`,
             url: `${siteUrl}/tag/${encodeURIComponent(decodedTag)}`,
-            siteName: "Rangamanch",
+            siteName: "MeroNepalTv",
             type: "website",
             locale: "ne_NP",
             images: [{ url: ogImage, width: 1200, height: 630, alt: `#${decodedTag}` }],

@@ -1,9 +1,9 @@
 # Mobile App API Documentation
 
-REST API for the Rangamanch mobile app. Base URL:
+REST API for the MeroNepalTv mobile app. Base URL:
 
 ```
-https://rangamanch.com/api/mobile
+https://MeroNepalTv.com/api/mobile
 ```
 
 All responses are JSON. Public endpoints require no authentication; user endpoints require a Bearer token.
@@ -99,10 +99,10 @@ Home screen payload: headlines, latest (paginated), trending, category sections 
   "success": true,
   "data": {
     "site": {
-      "name": "Rangamanch",
+      "name": "MeroNepalTv",
       "tagline": "",
       "logoUrl": "https://.../logo.png",
-      "logoText": "Rangamanch"
+      "logoText": "MeroNepalTv"
     },
     "headlines": [ "<post>", ... ],        // up to 5
     "latest": [ "<post>", ... ],            // page of non-province posts

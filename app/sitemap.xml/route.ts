@@ -14,9 +14,9 @@ const TWO_DAYS_MS = 2 * 24 * 60 * 60 * 1000
 
 export async function GET() {
     try {
-        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://rangamanch.com'
+        const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'https://meronepaltv.com').replace(/\/$/, '')
         const settings = await SettingsModel.get()
-        const siteName = settings.siteName || 'Rangamanch'
+        const siteName = settings.siteName || 'MeroNepalTv'
         const now = new Date().toISOString()
 
         // Build XML manually for better control

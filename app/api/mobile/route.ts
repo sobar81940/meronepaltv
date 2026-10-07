@@ -23,8 +23,8 @@ const ENDPOINTS = [
 // Endpoint index for mobile app developers
 export async function GET() {
     return jsonOk({
-        name: "Rangamanch Mobile API",
-        baseUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://rangamanch.com",
+        name: "MeroNepalTv Mobile API",
+        baseUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://MeroNepalTv.com",
         auth: "Send Bearer token for /auth/me. Public endpoints do not require auth.",
         endpoints: ENDPOINTS,
     });

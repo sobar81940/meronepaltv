@@ -1,7 +1,7 @@
 import clientPromise from "@/lib/mongodb";
 import { uploadToSpaces, uploadVideoToSpaces } from "@/lib/spaces";
 
-const DB_NAME = "meronepaltv";
+const DB_NAME = "MeroNepalTv";
 const CLOUDINARY_PATTERN = /https:\/\/res\.cloudinary\.com\/[^/]+\/(?:image|video)\/upload\/[^"'\s]+/g;
 
 interface MigrationResult {

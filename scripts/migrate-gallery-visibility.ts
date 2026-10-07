@@ -20,8 +20,8 @@ import { MongoClient } from "mongodb";
  * Safe to run multiple times (idempotent).
  */
 
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/meronepaltv";
-const DB_NAME = "meronepaltv";
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/MeroNepalTv";
+const DB_NAME = "MeroNepalTv";
 const COLLECTION = "gallery";
 
 async function migrate() {

@@ -9,5 +9,5 @@
       "detail": "The newsletter card <h3> now renders settings.newsletterTitle (default 'न्यूजलेटर सदस्यता लिनुहोस्') instead of the old literal 'ताजा अपडेट पाउनुहोस्'. This is design-documented as intentional since the title was already admin-managed. No action required unless the reference phrase must be the shipped default, in which case update the newsletterTitle default string."
     }
   ],
-  "reviewDoc": "/Users/aasish/Project/demo/meronepaltv/.agents/tasks/footer-review.md"
+  "reviewDoc": "/Users/aasish/Project/demo/MeroNepalTv/.agents/tasks/footer-review.md"
 }

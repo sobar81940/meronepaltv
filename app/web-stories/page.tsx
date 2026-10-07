@@ -5,19 +5,19 @@ import Link from "next/link";
 import { Play, Layers, Sparkles } from "lucide-react";
 import type { Metadata } from "next";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://rangamanch.com";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://MeroNepalTv.com";
 
 export const metadata: Metadata = {
     title: "वेब स्टोरिज",
-    description: "Rangamanch का नेपाली चलचित्र, मनोरञ्जन, सेलिब्रिटी र ताजा समाचारका आकर्षक वेब स्टोरिज हेर्नुहोस्।",
+    description: "MeroNepalTv का नेपाली चलचित्र, मनोरञ्जन, सेलिब्रिटी र ताजा समाचारका आकर्षक वेब स्टोरिज हेर्नुहोस्।",
     alternates: { canonical: `${SITE_URL}/web-stories` },
     openGraph: {
-        title: "वेब स्टोरिज | Rangamanch",
+        title: "वेब स्टोरिज | MeroNepalTv",
         description: "नेपाली चलचित्र, मनोरञ्जन, सेलिब्रिटी र ताजा समाचारका आकर्षक वेब स्टोरिज।",
         url: `${SITE_URL}/web-stories`,
         type: "website",
         locale: "ne_NP",
-        siteName: "Rangamanch",
+        siteName: "MeroNepalTv",
     },
 };
 

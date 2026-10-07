@@ -4,19 +4,19 @@ import { Post } from "@/lib/types";
 import { WithId } from "mongodb";
 import type { Metadata } from "next";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://rangamanch.com";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://MeroNepalTv.com";
 
 export const metadata: Metadata = {
     title: "छोटा भिडियोहरू",
-    description: "Rangamanch का नेपाली मनोरञ्जन, चलचित्र, सेलिब्रिटी र समाचारसम्बन्धी छोटा भिडियोहरू हेर्नुहोस्।",
+    description: "MeroNepalTv का नेपाली मनोरञ्जन, चलचित्र, सेलिब्रिटी र समाचारसम्बन्धी छोटा भिडियोहरू हेर्नुहोस्।",
     alternates: { canonical: `${SITE_URL}/shorts` },
     openGraph: {
-        title: "छोटा भिडियोहरू | Rangamanch",
+        title: "छोटा भिडियोहरू | MeroNepalTv",
         description: "नेपाली मनोरञ्जन, चलचित्र, सेलिब्रिटी र समाचारका छोटा भिडियोहरू।",
         url: `${SITE_URL}/shorts`,
         type: "website",
         locale: "ne_NP",
-        siteName: "Rangamanch",
+        siteName: "MeroNepalTv",
     },
 };
 

@@ -12,7 +12,7 @@
  *   - handles multi-line string values (e.g. HTML content with newlines)
  *
  * It is NOT a general SQL engine; it only understands the shapes mysqldump
- * produces, which is exactly what backup/mero_meronepaltv.sql contains.
+ * produces, which is exactly what backup/mero_MeroNepalTv.sql contains.
  */
 
 import { readFileSync } from "node:fs";

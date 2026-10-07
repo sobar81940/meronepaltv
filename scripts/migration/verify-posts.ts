@@ -25,7 +25,7 @@ async function main() {
     console.log("================================================\n");
 
     const root = projectRoot();
-    const dumpPath = join(root, "backup", "mero_meronepaltv.sql");
+    const dumpPath = join(root, "backup", "mero_MeroNepalTv.sql");
     const uploadsDir = join(root, "backup", "uploads");
 
     // ---- Source side (SQL dump) ----
@@ -101,7 +101,7 @@ async function main() {
         console.log(`   source image file missing:  ${srcMissingImageFile}`);
         console.log(`   source tag refs unresolved: ${srcTagRefsMissing.size}`);
 
-        console.log("\n---- DESTINATION (MongoDB meronepaltv.posts) ----");
+        console.log("\n---- DESTINATION (MongoDB MeroNepalTv.posts) ----");
         console.log(`   migrated posts count:       ${migratedCount}`);
         console.log(`   posts without imageUrl:     ${withoutImageUrl}`);
         console.log(`   posts missing category:     ${migratedMissingCategory}`);

@@ -9,8 +9,8 @@ export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
     const settings = await SettingsModel.get().catch(() => undefined);
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rangamanch.com";
-    const siteName = settings?.siteName || "Rangamanch";
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://MeroNepalTv.com";
+    const siteName = settings?.siteName || "MeroNepalTv";
     const title = settings?.liveBroadcast?.title || "लाइभ प्रसारण";
     const description = settings?.liveBroadcast?.description || `${siteName} को लाइभ प्रसारण हेर्नुहोस्।`;
     const ogImage = settings?.seoSettings?.ogImage || `${siteUrl}/images/og-image.png`;

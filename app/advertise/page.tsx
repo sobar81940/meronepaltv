@@ -7,9 +7,9 @@ export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
     const page = await PageModel.findPublishedBySlug("advertise");
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rangamanch.com";
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://MeroNepalTv.com";
     const title = page?.metaTitle || page?.title || "विज्ञापन";
-    const description = page?.metaDescription || "Rangamanch मा विज्ञापन दिनुहोस् - नेपालको विश्वसनीय समाचार पोर्टलमा आफ्नो ब्रान्ड प्रमोट गर्नुहोस्।";
+    const description = page?.metaDescription || "MeroNepalTv मा विज्ञापन दिनुहोस् - नेपालको विश्वसनीय समाचार पोर्टलमा आफ्नो ब्रान्ड प्रमोट गर्नुहोस्।";
 
     return {
         title,
@@ -21,7 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
             title,
             description,
             url: `${siteUrl}/advertise`,
-            siteName: "Rangamanch",
+            siteName: "MeroNepalTv",
             type: "website",
             locale: "ne_NP",
         },

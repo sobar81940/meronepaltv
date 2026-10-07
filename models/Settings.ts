@@ -5,6 +5,8 @@ const DB_NAME = "meronepaltv";
 
 export interface NavItem {
     name: string;
+    nameNe?: string;
+    nameEn?: string;
     href: string;
     order: number;
 }
@@ -209,15 +211,15 @@ export interface SiteSettings {
 // Default settings
 const defaultSettings: Omit<SiteSettings, "_id"> = {
     navigations: [
-        { name: "होमपेज", href: "/", order: 0 },
-        { name: "विदेशी मुद्रा", href: "/forex", order: 1 },
-        { name: "ज्योतिष", href: "/jyotish", order: 2 },
-        { name: "राशिफल", href: "/rashifal", order: 3 },
-        { name: "कार्यक्रम", href: "/event", order: 4 },
-        { name: "वेबस्टोरिज", href: "/web-stories", order: 5 },
-        { name: "विकि", href: "/wiki", order: 6 },
-        { name: "ग्याजेट", href: "/gadgets", order: 7 },
-        { name: "समाचार", href: "/news", order: 8 },
+        { name: "होमपेज", nameNe: "होमपेज", nameEn: "Home", href: "/", order: 0 },
+        { name: "विदेशी मुद्रा", nameNe: "विदेशी मुद्रा", nameEn: "Forex", href: "/forex", order: 1 },
+        { name: "ज्योतिष", nameNe: "ज्योतिष", nameEn: "Astrology", href: "/jyotish", order: 2 },
+        { name: "राशिफल", nameNe: "राशिफल", nameEn: "Horoscope", href: "/rashifal", order: 3 },
+        { name: "कार्यक्रम", nameNe: "कार्यक्रम", nameEn: "Events", href: "/event", order: 4 },
+        { name: "वेबस्टोरिज", nameNe: "वेबस्टोरिज", nameEn: "Web stories", href: "/web-stories", order: 5 },
+        { name: "विकि", nameNe: "विकि", nameEn: "Wiki", href: "/wiki", order: 6 },
+        { name: "ग्याजेट", nameNe: "ग्याजेट", nameEn: "Gadgets", href: "/gadgets", order: 7 },
+        { name: "समाचार", nameNe: "समाचार", nameEn: "News", href: "/news", order: 8 },
     ],
     trending: [],
     // Default Home Layout
@@ -293,9 +295,9 @@ const defaultSettings: Omit<SiteSettings, "_id"> = {
             ]
         },
     ],
-    siteName: "Rangamanch",
+    siteName: "MeroNepalTv",
     siteTagline: "",
-    logoText: "Rangamanch",
+    logoText: "MeroNepalTv",
     logoUrl: "",
     faviconUrl: "",
     // Display settings defaults
@@ -398,7 +400,7 @@ const defaultSettings: Omit<SiteSettings, "_id"> = {
             { platform: "facebook", url: "https://www.facebook.com/profile.php?id=100090291885611", enabled: true },
             { platform: "twitter", url: "https://twitter.com", enabled: true },
             { platform: "instagram", url: "https://instagram.com", enabled: true },
-            { platform: "youtube", url: "https://www.youtube.com/@rangamanchtv", enabled: true },
+            { platform: "youtube", url: "https://www.youtube.com/@MeroNepalTvtv", enabled: true },
             { platform: "tiktok", url: "", enabled: false },
             { platform: "linkedin", url: "", enabled: false },
             { platform: "whatsapp", url: "", enabled: false },
@@ -411,7 +413,7 @@ const defaultSettings: Omit<SiteSettings, "_id"> = {
         newsletterPlaceholder: "तपाईंको इमेल ठेगाना",
         newsletterButtonText: "सदस्यता लिनुहोस्",
         bottomBarLinks: [
-            { name: "Site Map", href: "/sitemap", order: 0 },
+            { name: "Site Map", href: "/sitemap.xml", order: 0 },
             { name: "Privacy Policy", href: "/privacy-policy", order: 1 },
             { name: "Terms of Use", href: "/terms-of-service", order: 2 },
         ],

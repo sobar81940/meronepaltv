@@ -8,7 +8,7 @@
  *
  * Safety:
  *   - defaults to dry-run; you must pass --live to write anything
- *   - targets the meronepaltv database only; never touches news-portal
+ *   - targets the MeroNepalTv database only; never touches news-portal
  *   - never clears the posts collection
  */
 
@@ -28,7 +28,7 @@ async function main() {
     const { dryRun, limit } = parseArgs(process.argv.slice(2));
 
     console.log("================================================");
-    console.log("  Posts migration: MySQL `news` -> MongoDB meronepaltv.posts");
+    console.log("  Posts migration: MySQL `news` -> MongoDB MeroNepalTv.posts");
     console.log(`  Mode: ${dryRun ? "DRY RUN (no writes)" : "LIVE"}`);
     if (limit) console.log(`  Limit: first ${limit} rows`);
     console.log("================================================\n");
@@ -40,7 +40,7 @@ async function main() {
     await client.connect();
 
     try {
-        const db = client.db(env.MONGO_DB_NAME); // meronepaltv — fixed, never news-portal
+        const db = client.db(env.MONGO_DB_NAME); // MeroNepalTv — fixed, never news-portal
         const migrator = new PostsMigrator({ dryRun, env, db, limit });
 
         console.log(`\nSQL dump:    ${migrator.sqlDumpPath}`);

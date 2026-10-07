@@ -70,7 +70,7 @@ export async function generateMetadata({ params }: PageProps) {
         return { title: 'Story Not Found' };
     }
 
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rangamanch.com";
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://MeroNepalTv.com";
     const coverImage = story.coverImage
         ? (story.coverImage.startsWith("http") ? story.coverImage : `${siteUrl}${story.coverImage}`)
         : undefined;
@@ -92,7 +92,7 @@ export async function generateMetadata({ params }: PageProps) {
             images: coverImage ? [{ url: coverImage, alt: story.title }] : undefined,
             type: 'article',
             locale: 'ne_NP',
-            siteName: 'Rangamanch',
+            siteName: 'MeroNepalTv',
         },
         twitter: {
             card: "summary_large_image",

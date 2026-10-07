@@ -53,13 +53,16 @@ const toISOString = (date: Date | string | number | null | undefined): string =>
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await SettingsModel.get().catch(() => undefined);
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rangamanch.com";
-  const siteName = settings?.siteName || "Rangamanch";
-  const siteDescription = settings?.seoSettings?.siteDescription || settings?.siteTagline || "Rangamanch.com is a Nepal-based news and entertainment portal covering Nepali films, entertainment, celebrities, technology, business, sports and the latest news.";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://meronepaltv.com";
+  const siteName = settings?.siteName || "MeroNepalTv";
+  const siteDescription = settings?.seoSettings?.siteDescription || settings?.siteTagline || "MeroNepalTv.com is a Nepal-based news and entertainment portal covering Nepali films, entertainment, celebrities, technology, business, sports and the latest news.";
   const homeTitle = `${siteName} | नेपाली मनोरञ्जन, चलचित्र र समाचार`;
 
   // Ensure OG image URL is always absolute
-  const rawOgImage = settings?.seoSettings?.ogImage || `/images/og-image.png`;
+  const configuredOgImage = settings?.seoSettings?.ogImage;
+  const rawOgImage = configuredOgImage && !configuredOgImage.endsWith("/images/og-image.png")
+    ? configuredOgImage
+    : `/images/og-image.jpg`;
   const ogImageUrl = rawOgImage.startsWith("http") ? rawOgImage : `${siteUrl}${rawOgImage}`;
 
   return {
@@ -70,10 +73,10 @@ export async function generateMetadata(): Promise<Metadata> {
       languages: { ne: siteUrl },
     },
     keywords: [
-      "Rangamanch",
-      "rangamanch.com",
-      "Rangamanch Nepal",
-      "रंगमञ्च",
+      "MeroNepalTv",
+      "MeroNepalTv.com",
+      "MeroNepalTv Nepal",
+      "",
       "नेपाली मनोरञ्जन समाचार",
       "नेपाली चलचित्र समाचार",
     ],
@@ -90,7 +93,7 @@ export async function generateMetadata(): Promise<Metadata> {
           width: 1200,
           height: 630,
           alt: homeTitle,
-          type: "image/png",
+          type: "image/jpeg",
         },
       ],
     },
@@ -254,7 +257,7 @@ export default async function HomePage() {
     8
   ).map(serializePost);
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rangamanch.com";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://meronepaltv.com";
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -298,7 +301,7 @@ export default async function HomePage() {
       </div>
 
       <main id="main-content" className="max-w-7xl mx-auto px-4 ">
-        <h1 className="sr-only">{settings?.siteName || "Rangamanch"}</h1>
+        <h1 className="sr-only">{settings?.siteName || "MeroNepalTv"}</h1>
 
   
 
@@ -817,9 +820,9 @@ export default async function HomePage() {
           accentColor: "#e61e2b",
           layout: "modern",
         } as import("@/models/Settings").FooterSettings}
-        siteName={settings?.siteName || "Rangamanch"}
+        siteName={settings?.siteName || "MeroNepalTv"}
         logoUrl={settings?.logoUrl || ""}
-        logoText={settings?.logoText || "Rangamanch"}
+        logoText={settings?.logoText || "MeroNepalTv"}
       />
     </div >
   );

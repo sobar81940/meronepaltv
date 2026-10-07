@@ -8,19 +8,19 @@ import SettingsModel from "@/models/Settings";
 import NepaliDate from "nepali-date-converter";
 import type { Metadata } from "next";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://rangamanch.com";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://MeroNepalTv.com";
 
 export const metadata: Metadata = {
     title: "नेपालका कार्यक्रम तथा इभेन्टहरू",
-    description: "Rangamanch मा नेपालका आगामी सम्मेलन, महोत्सव, सांस्कृतिक, खेलकुद र मनोरञ्जन कार्यक्रमहरूको जानकारी हेर्नुहोस्।",
+    description: "MeroNepalTv मा नेपालका आगामी सम्मेलन, महोत्सव, सांस्कृतिक, खेलकुद र मनोरञ्जन कार्यक्रमहरूको जानकारी हेर्नुहोस्।",
     alternates: { canonical: `${SITE_URL}/event` },
     openGraph: {
-        title: "नेपालका कार्यक्रम तथा इभेन्टहरू | Rangamanch",
+        title: "नेपालका कार्यक्रम तथा इभेन्टहरू | MeroNepalTv",
         description: "नेपालका आगामी सम्मेलन, महोत्सव, सांस्कृतिक, खेलकुद र मनोरञ्जन कार्यक्रमहरूको जानकारी।",
         url: `${SITE_URL}/event`,
         type: "website",
         locale: "ne_NP",
-        siteName: "Rangamanch",
+        siteName: "MeroNepalTv",
     },
 };
 

@@ -7,9 +7,9 @@ export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
     const page = await PageModel.findPublishedBySlug("careers");
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rangamanch.com";
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://MeroNepalTv.com";
     const title = page?.metaTitle || page?.title || "करियर";
-    const description = page?.metaDescription || "Rangamanch मा करियर - नेपालको अग्रणी समाचार पोर्टलसँग काम गर्ने अवसर। हालका रिक्त पदहरू र आवेदन प्रक्रिया बारे जान्नुहोस्।";
+    const description = page?.metaDescription || "MeroNepalTv मा करियर - नेपालको अग्रणी समाचार पोर्टलसँग काम गर्ने अवसर। हालका रिक्त पदहरू र आवेदन प्रक्रिया बारे जान्नुहोस्।";
 
     return {
         title,
@@ -21,7 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
             title,
             description,
             url: `${siteUrl}/careers`,
-            siteName: "Rangamanch",
+            siteName: "MeroNepalTv",
             type: "website",
             locale: "ne_NP",
         },

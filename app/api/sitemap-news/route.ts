@@ -10,9 +10,9 @@ const MAX_URLS = 1000
 
 export async function GET() {
     try {
-        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://rangamanch.com'
+        const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'https://meronepaltv.com').replace(/\/$/, '')
         const settings = await SettingsModel.get()
-        const siteName = settings.siteName || 'Rangamanch'
+        const siteName = settings.siteName || 'MeroNepalTv'
         const cutoff = Date.now() - NEWS_WINDOW_MS
 
         // Build XML manually for better control

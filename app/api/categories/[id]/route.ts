@@ -40,6 +40,13 @@ export async function PUT(
         const { id } = await params;
         const body = await request.json();
 
+        if (!body.name && !body.nameNe && !body.nameEn) {
+            return Response.json(
+                { success: false, error: "At least one category name is required" },
+                { status: 400 }
+            );
+        }
+
         const category = await CategoryModel.update(id, body);
 
         if (!category) {

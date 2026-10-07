@@ -29,9 +29,9 @@ const khand = Khand({
   preload: true,
 });
 
-const DEFAULT_SITE_URL = "https://rangamanch.com";
-const DEFAULT_SITE_NAME = "Rangamanch";
-const DEFAULT_DESCRIPTION = "Rangamanch.com is Nepal's entertainment and news portal for Nepali films, celebrities, music, technology, sports and the latest news.";
+const DEFAULT_SITE_URL = "https://meronepaltv.com";
+const DEFAULT_SITE_NAME = "MeroNepalTv";
+const DEFAULT_DESCRIPTION = "MeroNepalTv.com is Nepal's entertainment and news portal for Nepali films, celebrities, music, technology, sports and the latest news.";
 
 const normalizeSiteUrl = (url: string) => url.replace(/\/$/, "");
 
@@ -50,7 +50,10 @@ export async function generateMetadata(): Promise<Metadata> {
     const siteName = settings.siteName || DEFAULT_SITE_NAME;
     const siteDescription = settings.seoSettings?.siteDescription || settings.siteTagline || DEFAULT_DESCRIPTION;
 
-    const ogImage = settings.seoSettings?.ogImage || "/images/og-image.png";
+    const configuredOgImage = settings.seoSettings?.ogImage;
+    const ogImage = configuredOgImage && !configuredOgImage.endsWith("/images/og-image.png")
+      ? configuredOgImage
+      : "/images/og-image.jpg";
 
     const faviconUrl = settings.faviconUrl || "/favicon.ico";
     const icons: Metadata['icons'] = {
@@ -85,7 +88,7 @@ export async function generateMetadata(): Promise<Metadata> {
             width: 1200,
             height: 630,
             alt: siteName,
-            type: "image/png",
+            type: "image/jpeg",
           },
         ],
       },
@@ -141,13 +144,13 @@ export async function generateMetadata(): Promise<Metadata> {
         description: DEFAULT_DESCRIPTION,
         url: DEFAULT_SITE_URL,
         locale: "ne_NP",
-        images: [{ url: `${DEFAULT_SITE_URL}/images/og-image.png`, width: 1200, height: 630, alt: DEFAULT_SITE_NAME }],
+        images: [{ url: `${DEFAULT_SITE_URL}/images/og-image.jpg`, width: 1200, height: 630, alt: DEFAULT_SITE_NAME, type: "image/jpeg" }],
       },
       twitter: {
         card: "summary_large_image",
         title: DEFAULT_SITE_NAME,
         description: DEFAULT_DESCRIPTION,
-        images: [`${DEFAULT_SITE_URL}/images/og-image.png`],
+        images: [`${DEFAULT_SITE_URL}/images/og-image.jpg`],
       },
       robots: {
         index: true,
@@ -210,27 +213,27 @@ export default async function RootLayout({
               "@context": "https://schema.org",
               "@type": "NewsMediaOrganization",
               "@id": `${siteUrl}/#organization`,
-              "name": settings?.siteName || "Rangamanch",
-              "alternateName": ["rangamanch", "Rangamanch News", "रंगमञ्च", "Rangamanch Nepal"],
-              "legalName": settings?.siteName || "Rangamanch",
+              "name": settings?.siteName || "MeroNepalTv",
+              "alternateName": ["MeroNepalTv", "MeroNepalTv News", "MeroNepalTv Nepal"],
+              "legalName": settings?.siteName || "MeroNepalTv",
               "url": siteUrl,
               "logo": {
                 "@type": "ImageObject",
                 "@id": `${siteUrl}/#logo`,
                 "url": settings?.logoUrl
                   ? (settings.logoUrl.startsWith("http") ? settings.logoUrl : `${siteUrl}${settings.logoUrl}`)
-                  : `${siteUrl}/images/og-image.png`,
+                  : `${siteUrl}/images/og-image.jpg`,
                 "contentUrl": settings?.logoUrl
                   ? (settings.logoUrl.startsWith("http") ? settings.logoUrl : `${siteUrl}${settings.logoUrl}`)
-                  : `${siteUrl}/images/og-image.png`,
+                  : `${siteUrl}/images/og-image.jpg`,
                 "width": 512,
                 "height": 512,
-                "caption": settings?.siteName || "Rangamanch",
+                "caption": settings?.siteName || "MeroNepalTv",
               },
               "image": settings?.seoSettings?.ogImage
                 ? (settings.seoSettings.ogImage.startsWith("http") ? settings.seoSettings.ogImage : `${siteUrl}${settings.seoSettings.ogImage}`)
-                : `${siteUrl}/images/og-image.png`,
-              "description": settings?.seoSettings?.siteDescription || settings?.siteTagline || "Rangamanch - नेपालको विश्वसनीय समाचार पोर्टल। ताजा समाचार, मनोरञ्जन, खेलकुद, राशिफल र थप।",
+                : `${siteUrl}/images/og-image.jpg`,
+              "description": settings?.seoSettings?.siteDescription || settings?.siteTagline || "MeroNepalTv - नेपालको विश्वसनीय समाचार पोर्टल। ताजा समाचार, मनोरञ्जन, खेलकुद, राशिफल र थप।",
               "inLanguage": ["ne", "ne-NP"],
               "areaServed": {
                 "@type": "Country",
@@ -272,11 +275,11 @@ export default async function RootLayout({
               "@context": "https://schema.org",
               "@type": "WebSite",
               "@id": `${siteUrl}/#website`,
-              "name": settings?.siteName || "Rangamanch",
-              "alternateName": ["rangamanch", "Rangamanch News Portal"],
+              "name": settings?.siteName || "MeroNepalTv",
+              "alternateName": ["MeroNepalTv", "MeroNepalTv News Portal"],
               "url": siteUrl,
               "inLanguage": "ne-NP",
-              "description": settings?.seoSettings?.siteDescription || settings?.siteTagline || "Rangamanch News Portal",
+              "description": settings?.seoSettings?.siteDescription || settings?.siteTagline || "MeroNepalTv News Portal",
               "publisher": {
                 "@id": `${siteUrl}/#organization`,
               },

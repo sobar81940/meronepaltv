@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Save, Menu, Plus, Trash2, GripVertical, ShieldAlert } from "lucide-react";
+import { Save, Menu, Plus, Trash2, GripVertical } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { SiteSettings, NavItem } from "@/models/Settings";
 import {
@@ -55,9 +55,16 @@ function SortableNavItem({
             </button>
             <input
                 type="text"
-                placeholder="Name (e.g., होमपेज)"
-                value={item.name}
-                onChange={(e) => onUpdate(index, "name", e.target.value)}
+                placeholder="Nepali name (e.g., होमपेज)"
+                value={item.nameNe || item.name}
+                onChange={(e) => onUpdate(index, "nameNe", e.target.value)}
+                className="flex-1 px-3 py-2 bg-slate-700 border border-slate-600 rounded text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <input
+                type="text"
+                placeholder="English name (e.g., Home)"
+                value={item.nameEn || ""}
+                onChange={(e) => onUpdate(index, "nameEn", e.target.value)}
                 className="flex-1 px-3 py-2 bg-slate-700 border border-slate-600 rounded text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <input
@@ -92,6 +99,12 @@ export default function NavigationSettingsPage() {
         })
     );
 
+    const fetchSettings = () => {
+        fetch("/api/settings").then((res) => res.json()).then((data) => {
+            if (data.success && data.data) setSettings(data.data);
+        }).finally(() => setLoading(false));
+    };
+
     // Check user access and fetch
     useEffect(() => {
         const checkAccess = async () => {
@@ -103,16 +116,10 @@ export default function NavigationSettingsPage() {
                 const canManageSettings = data.user.permissions?.canManageSettings ?? false;
                 if (isAdmin || canManageSettings) { setHasAccess(true); fetchSettings(); }
                 else setHasAccess(false);
-            } catch (error) { setHasAccess(false); }
+            } catch { setHasAccess(false); }
         };
         checkAccess();
     }, [router]);
-
-    const fetchSettings = () => {
-        fetch("/api/settings").then((res) => res.json()).then((data) => {
-            if (data.success && data.data) setSettings(data.data);
-        }).finally(() => setLoading(false));
-    }
 
     const handleSave = async () => {
         if (!settings) return;
@@ -135,6 +142,8 @@ export default function NavigationSettingsPage() {
         if (!settings) return;
         const newItem: NavItem = {
             name: "",
+            nameNe: "",
+            nameEn: "",
             href: "/",
             order: settings.navigations.length,
         };

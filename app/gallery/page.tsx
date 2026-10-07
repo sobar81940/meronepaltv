@@ -7,19 +7,19 @@ import { Images, Film, Play, ChevronLeft, ChevronRight, Sparkles, LayoutGrid } f
 import GalleryVideoCard from "@/components/GalleryVideoCard";
 import type { Metadata } from "next";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://rangamanch.com";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://MeroNepalTv.com";
 
 export const metadata: Metadata = {
     title: "फोटो तथा भिडियो ग्यालरी",
-    description: "Rangamanch को फोटो र भिडियो ग्यालरीमा नेपाली मनोरञ्जन, चलचित्र, सेलिब्रिटी र कार्यक्रमका दृश्यहरू हेर्नुहोस्।",
+    description: "MeroNepalTv को फोटो र भिडियो ग्यालरीमा नेपाली मनोरञ्जन, चलचित्र, सेलिब्रिटी र कार्यक्रमका दृश्यहरू हेर्नुहोस्।",
     alternates: { canonical: `${SITE_URL}/gallery` },
     openGraph: {
-        title: "फोटो तथा भिडियो ग्यालरी | Rangamanch",
+        title: "फोटो तथा भिडियो ग्यालरी | MeroNepalTv",
         description: "नेपाली मनोरञ्जन, चलचित्र, सेलिब्रिटी र कार्यक्रमका फोटो तथा भिडियोहरू।",
         url: `${SITE_URL}/gallery`,
         type: "website",
         locale: "ne_NP",
-        siteName: "Rangamanch",
+        siteName: "MeroNepalTv",
     },
 };
 

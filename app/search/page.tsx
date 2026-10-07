@@ -11,13 +11,13 @@ import { Post } from "@/lib/types";
 export async function generateMetadata({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
     const params = await searchParams;
     const query = params.q || "";
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rangamanch.com";
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://MeroNepalTv.com";
 
     return {
-        title: query ? `"${query}" को खोज नतिजा - Rangamanch` : "खोज - Rangamanch",
+        title: query ? `"${query}" को खोज नतिजा - MeroNepalTv` : "खोज - MeroNepalTv",
         description: query
-            ? `Rangamanch मा "${query}" सम्बन्धित समाचार र जानकारी खोज्नुहोस्।`
-            : "Rangamanch मा नेपाली समाचार, मनोरञ्जन र जानकारी खोज्नुहोस्।",
+            ? `MeroNepalTv मा "${query}" सम्बन्धित समाचार र जानकारी खोज्नुहोस्।`
+            : "MeroNepalTv मा नेपाली समाचार, मनोरञ्जन र जानकारी खोज्नुहोस्।",
         robots: { index: false, follow: true },
         alternates: {
             canonical: `${siteUrl}/search${query ? `?q=${encodeURIComponent(query)}` : ""}`,
@@ -36,10 +36,10 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
 
     const normalizedQuery = query.trim().toLowerCase();
     const brandQueries = new Set([
-        "rangamanch",
-        "rangamanch.com",
+        "MeroNepalTv",
+        "MeroNepalTv.com",
         "ranga manch",
-        "रंगमञ्च",
+        "",
         "रंगमंच",
     ]);
 

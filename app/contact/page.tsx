@@ -11,8 +11,8 @@ export async function generateMetadata(): Promise<Metadata> {
         PageModel.findPublishedBySlug("contact"),
         SettingsModel.get().catch(() => undefined),
     ]);
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rangamanch.com";
-    const siteName = settings?.siteName || "Rangamanch";
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://MeroNepalTv.com";
+    const siteName = settings?.siteName || "MeroNepalTv";
     const title = page?.metaTitle || page?.title || "सम्पर्क";
     const description = page?.metaDescription || `${siteName} सँग सम्पर्क गर्नुहोस्। हाम्रो टोलीसँग कुनै पनि प्रश्न वा सुझावका लागि सम्पर्क गर्नुहोस्।`;
     const ogImage = settings?.seoSettings?.ogImage || `${siteUrl}/images/og-image.png`;
@@ -46,8 +46,8 @@ export default async function ContactPage() {
         PageModel.findPublishedBySlug("contact"),
         SettingsModel.get().catch(() => undefined),
     ]);
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rangamanch.com";
-    const siteName = settings?.siteName || "Rangamanch";
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://MeroNepalTv.com";
+    const siteName = settings?.siteName || "MeroNepalTv";
 
     if (!page) {
         return (
