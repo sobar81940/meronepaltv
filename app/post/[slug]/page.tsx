@@ -466,7 +466,7 @@ export default async function PostDetailPage({ params }: PageProps) {
                                         <Share2 size={14} className="text-red-600" />
                                         <p className="text-xs text-gray-500 uppercase tracking-wider font-medium">Shares</p>
                                     </div>
-                                    <p className="text-lg font-bold text-red-600">{formatViewCount(displayPost.shareCount || 500)}</p>
+                                    <p className="text-lg font-bold text-red-600">{formatViewCount(displayPost.shareCount || 0)}</p>
                                 </div>
                             </div>
                             </div>
@@ -526,7 +526,7 @@ export default async function PostDetailPage({ params }: PageProps) {
                             </div>
                             <div className="flex items-center gap-1 text-gray-400">
                                 <Share2 size={14} />
-                                <span>{formatViewCount(displayPost.shareCount || 200)}</span>
+                                <span>{formatViewCount(displayPost.shareCount || 0)}</span>
                             </div>
                         </div>
 

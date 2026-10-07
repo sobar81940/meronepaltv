@@ -63,8 +63,6 @@ export default function WorldSection({
                                     alt={mainPost.title}
                                     fill
                                     className="object-cover group-hover:scale-105 transition-transform duration-500"
-                                    unoptimized
-                                    priority
                                 />
                             </div>
                         )}
@@ -91,7 +89,6 @@ export default function WorldSection({
                                                 fill
                                                 sizes="120px"
                                                 className="object-cover group-hover:scale-105 transition-transform duration-300"
-                                                unoptimized
                                             />
                                         </div>
                                     )}
@@ -119,7 +116,6 @@ export default function WorldSection({
                                             fill
                                             sizes="140px"
                                             className="object-cover group-hover:scale-105 transition-transform duration-300"
-                                            unoptimized
                                         />
                                     </div>
                                 )}

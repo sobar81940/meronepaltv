@@ -21,6 +21,7 @@ import {
     Zap,
 } from "lucide-react";
 import Link from "next/link";
+import AdminStatsCards from "@/components/AdminStatsCards";
 
 export const dynamic = "force-dynamic";
 
@@ -57,17 +58,6 @@ export default async function AdminDashboard() {
         PostModel.paginate(1, 5),
     ]);
 
-    const stats = [
-        { label: "Total Posts", value: statsData.totalPosts, icon: FileText, badge: "Core", trend: "+12%", color: "#2476f3", iconBg: "bg-blue-100 text-blue-600" },
-        { label: "Published", value: statsData.publishedPosts, icon: Eye, badge: "Core", trend: "+8%", color: "#16c784", iconBg: "bg-emerald-100 text-emerald-600" },
-        { label: "Drafts", value: statsData.draftPosts, icon: EyeOff, badge: "Core", trend: "0%", color: "#f6a800", iconBg: "bg-amber-100 text-amber-600" },
-        { label: "This Month", value: statsData.thisMonthPosts, icon: CalendarDays, badge: "Period", trend: "0%", color: "#9b6cff", iconBg: "bg-violet-100 text-violet-600" },
-        { label: "This Year", value: statsData.thisYearPosts, icon: CalendarRange, badge: "Period", trend: "+18%", color: "#f03b9d", iconBg: "bg-pink-100 text-pink-600" },
-        { label: "Visitors", value: statsData.totalVisitors, icon: Users, badge: "Engagement", trend: "+27%", color: "#18b9e8", iconBg: "bg-cyan-100 text-cyan-600" },
-        { label: "Views", value: statsData.totalViews, icon: TrendingUp, badge: "Engagement", trend: "+14%", color: "#25c981", iconBg: "bg-green-100 text-green-600" },
-        { label: "Shares", value: statsData.totalShares, icon: Share2, badge: "Engagement", trend: "+21%", color: "#ef5571", iconBg: "bg-rose-100 text-rose-600" },
-    ];
-
     const quickActions = [
         { label: "New Post", description: "Create a news article", href: "/admin/posts/new", icon: Plus },
         { label: "All Posts", description: "Manage and edit your articles", href: "/admin/posts", icon: List },
@@ -98,27 +88,7 @@ export default async function AdminDashboard() {
                 </div>
             </div>
 
-            <div className="relative grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-                {stats.map((stat) => (
-                    <div key={stat.label} className="group rounded-2xl border border-slate-200/80 bg-white/90 p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-xl hover:shadow-blue-100/60">
-                        <div className="flex items-start justify-between">
-                            <div className={`flex h-11 w-11 items-center justify-center rounded-xl ${stat.iconBg}`}><stat.icon size={21} /></div>
-                            <div className="flex items-center gap-2">
-                                <span className="rounded-full bg-slate-50 px-2.5 py-1 text-[10px] font-semibold text-slate-500">{stat.badge}</span>
-                                <span className="text-slate-400">⋮</span>
-                            </div>
-                        </div>
-                        <div className="mt-4 flex items-end justify-between gap-2">
-                            <div>
-                                <p className="text-2xl font-bold tabular-nums text-slate-950">{stat.value.toLocaleString()}</p>
-                                <p className="mt-1 text-xs font-medium text-slate-500">{stat.label}</p>
-                                <p className="mt-2 text-[11px] font-semibold text-emerald-500">↗ {stat.trend} <span className="font-normal text-slate-400">from last period</span></p>
-                            </div>
-                            <Sparkline color={stat.color} />
-                        </div>
-                    </div>
-                ))}
-            </div>
+            <AdminStatsCards initialStats={statsData} />
 
             <div className="relative grid grid-cols-1 gap-5 xl:grid-cols-5">
                 <section className="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm xl:col-span-2">

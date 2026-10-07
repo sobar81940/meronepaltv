@@ -4,6 +4,7 @@ import { Post, CreatePostInput } from "@/lib/types";
 
 const COLLECTION_NAME = "posts";
 const DB_NAME = "meronepaltv";
+const SHARE_INCREMENT = 1;
 
 // Nepali to Roman transliteration map
 const NEPALI_TO_ROMAN: Record<string, string> = {
@@ -113,6 +114,7 @@ const POST_LIST_PROJECTION = {
     isHeadline: 1,
     viewCount: 1,
     shareCount: 1,
+    shareIPs: 1,
     visitorCount: 1,
     readingTime: 1,
     socialShares: 1,
@@ -363,7 +365,7 @@ export const PostModel = {
             published: input.published ?? false,
             isHeadline: input.isHeadline ?? false,
             viewCount: 0,
-            shareCount: 500, // Default share count of 500
+            shareCount: 0,
             visitorCount: 0,
             sharedIPs: [],
             visitorIPs: [],
@@ -386,23 +388,17 @@ export const PostModel = {
             return { incremented: false };
         }
 
-        // Check if this IP already shared
-        const post = await collection.findOne({ slug });
-        const sharedIPs = post?.sharedIPs || [];
-        const hasAlreadyShared = sharedIPs.includes(ipAddress);
-
-        if (hasAlreadyShared) {
-            return { incremented: false };
-        }
-
-        // Add IP to shared set and increment by 200
-        await collection.updateOne(
-            { slug },
+        const result = await collection.updateOne(
+            { slug, shareIPs: { $ne: ipAddress } },
             {
-                $inc: { shareCount: 200 },
-                $addToSet: { sharedIPs: ipAddress }
+                $inc: { shareCount: SHARE_INCREMENT },
+                $addToSet: { shareIPs: ipAddress }
             }
         );
+
+        if (result.modifiedCount === 0) {
+            return { incremented: false };
+        }
 
         return { incremented: true };
     },
@@ -551,13 +547,11 @@ export const PostModel = {
         // If IP is provided, check whether it has already been recorded for this post
         if (ipAddress) {
             const post = await collection.findOne({ slug });
-            const sharedIPs = post?.sharedIPs || [];
             const visitorIPs = post?.visitorIPs || [];
-            const hasAlreadyShared = sharedIPs.includes(ipAddress);
             const hasAlreadyVisited = visitorIPs.includes(ipAddress);
             
             // If the IP already exists, only increment the page view counter
-            if (hasAlreadyShared || hasAlreadyVisited) {
+            if (hasAlreadyVisited) {
                 await collection.updateOne(
                     { slug },
                     { 
@@ -574,12 +568,8 @@ export const PostModel = {
                         $inc: { 
                             viewCount: 1,
                             visitorCount: 1,
-                            shareCount: 20  // Add 20 shares per unique IP
                         },
-                        $addToSet: { 
-                            sharedIPs: ipAddress,  // Add IP to set of unique sharers
-                            visitorIPs: ipAddress   // Add IP to set of unique visitors
-                        }
+                        $addToSet: { visitorIPs: ipAddress }
                     }
                 );
             }
@@ -624,13 +614,18 @@ export const PostModel = {
                 { $group: { _id: null, totalViews: { $sum: { $ifNull: ["$viewCount", 0] } } } }
             ]).toArray(),
             collection.aggregate([
-                { $group: { _id: null, totalShares: { $sum: { $ifNull: ["$shareCount", 0] } } } }
+                {
+                    $group: {
+                        _id: null,
+                        totalShares: { $sum: { $ifNull: ["$shareCount", 0] } },
+                    },
+                },
             ]).toArray(),
             collection.aggregate([
                 {
                     $group: {
                         _id: null,
-                        totalVisitors: { $sum: { $size: { $ifNull: ["$sharedIPs", []] } } }
+                        totalVisitors: { $sum: { $size: { $ifNull: ["$visitorIPs", []] } } }
                     }
                 }
             ]).toArray()
@@ -647,6 +642,25 @@ export const PostModel = {
             totalShares: sharesResult[0]?.totalShares || 0,
             totalVisitors: visitorsResult[0]?.totalVisitors || 0,
         };
+    },
+
+    async resetEngagementStats(): Promise<void> {
+        const collection = await getCollection();
+        await collection.updateMany(
+            {},
+            {
+                $set: {
+                    viewCount: 0,
+                    shareCount: 0,
+                    visitorCount: 0,
+                    shareIPs: [],
+                    visitorIPs: [],
+                },
+                $unset: {
+                    sharedIPs: "",
+                },
+            }
+        );
     },
 };
 

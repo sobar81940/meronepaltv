@@ -72,7 +72,6 @@ export default function SportsSection({
                                         width={1600}
                                         height={1000}
                                         className="h-[320px] w-full object-cover md:h-[380px] group-hover:scale-105 transition-transform duration-700"
-                                        unoptimized
                                     />
                                 )}
                                 {/* subtle inset border like screenshot */}
@@ -111,7 +110,6 @@ export default function SportsSection({
                                                     fill
                                                     sizes="80px"
                                                     className="rounded-xl object-cover"
-                                                    unoptimized
                                                 />
                                             </div>
                                         ) : (

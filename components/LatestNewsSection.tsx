@@ -60,7 +60,6 @@ export default function LatestNewsSection({ posts, title = "ताजा सम�
                                     fill
                                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                     className="object-cover group-hover:scale-105 transition-transform duration-300"
-                                    unoptimized
                                 />
                             )}
                         </div>
@@ -109,8 +108,8 @@ export default function LatestNewsSection({ posts, title = "ताजा सम�
                                             src={post.authorImage}
                                             alt={post.author || 'Author'}
                                             fill
+                                            sizes="20px"
                                             className="object-cover"
-                                            unoptimized
                                         />
                                     ) : (
                                         <div className="w-full h-full bg-blue-600 flex items-center justify-center text-[10px] text-white font-bold">

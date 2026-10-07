@@ -58,7 +58,6 @@ export default function CategorySection({ posts, title, categorySlug, layout = '
                                             fill
                                             sizes="(max-width: 768px) 100vw, 66vw"
                                             className="object-cover group-hover:scale-105 transition-transform duration-300"
-                                            unoptimized
                                         />
                                     </div>
                                 )}
@@ -89,7 +88,6 @@ export default function CategorySection({ posts, title, categorySlug, layout = '
                                                 fill
                                                 sizes="80px"
                                                 className="object-cover group-hover:scale-105 transition-transform duration-300"
-                                                unoptimized
                                             />
                                         </div>
                                     )}
@@ -123,7 +121,6 @@ export default function CategorySection({ posts, title, categorySlug, layout = '
                                         fill
                                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                                         className="object-cover group-hover:scale-105 transition-transform duration-300"
-                                        unoptimized
                                     />
                                 )}
                             </div>

@@ -58,8 +58,6 @@ export default function NewsSection({
                                 alt={mainPost.title}
                                 fill
                                 className="object-cover group-hover:scale-105 transition-transform duration-700"
-                                unoptimized
-                                priority
                             />
                         </div>
                     )}
@@ -90,7 +88,6 @@ export default function NewsSection({
                                         fill
                                         sizes="(max-width: 768px) 150px, 200px"
                                         className="object-cover group-hover:scale-105 transition-transform duration-300"
-                                        unoptimized
                                     />
                                 </div>
                             )}

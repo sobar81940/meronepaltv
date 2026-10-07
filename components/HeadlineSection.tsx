@@ -63,7 +63,6 @@ export default function HeadlineSection({ posts }: HeadlineSectionProps) {
                                             fill
                                             sizes="28px"
                                             className="object-cover"
-                                            unoptimized
                                         />
                                     </div>
                                 ) : (
@@ -99,9 +98,7 @@ export default function HeadlineSection({ posts }: HeadlineSectionProps) {
                                     fill
                                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1152px"
                                     className="object-cover group-hover:scale-105 transition-transform duration-500"
-                                    priority={index === 0}
                                     fetchPriority={index === 0 ? "high" : undefined}
-                                    unoptimized
                                 />
                             </div>
                         </Link>

@@ -73,8 +73,6 @@ export default function BusinessSection({
                             fill
                             sizes="(max-width: 768px) 100vw, 50vw"
                             className="object-cover group-hover:scale-105 transition-transform duration-700"
-                            unoptimized
-                            priority
                         />
                     ) : (
                         <div className="w-full h-full flex items-center justify-center text-gray-400">
@@ -114,7 +112,6 @@ export default function BusinessSection({
                                         fill
                                         sizes="(max-width: 768px) 120px, 140px"
                                         className="object-cover group-hover:scale-105 transition-transform duration-300"
-                                        unoptimized
                                     />
                                 </div>
                             )}

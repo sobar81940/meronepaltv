@@ -41,6 +41,11 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
+        hostname: "img.youtube.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
         hostname: "dunz0.sgp1.digitaloceanspaces.com",
         pathname: "/**",
       },

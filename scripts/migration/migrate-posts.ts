@@ -325,7 +325,7 @@ export class PostsMigrator {
         // Defaults applied only on first insert (never overwrite live app state).
         const setOnInsert: Record<string, unknown> = {
             isHeadline: false,
-            shareCount: 500,
+            shareCount: 0,
             visitorCount: 0,
             sharedIPs: [],
             visitorIPs: [],

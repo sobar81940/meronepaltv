@@ -67,7 +67,6 @@ export default function FrontPageSection({ posts, title = "राजनीति
                                         fill
                                         sizes="100px"
                                         className="object-cover group-hover:scale-110 transition-transform duration-500"
-                                        unoptimized
                                     />
                                 </div>
                             )}
@@ -97,8 +96,6 @@ export default function FrontPageSection({ posts, title = "राजनीति
                                     fill
                                     sizes="(max-width: 1024px) 100vw, 800px"
                                     className="object-cover group-hover:scale-105 transition-transform duration-700"
-                                    priority
-                                    unoptimized
                                 />
                             )}
                             {/* Gradient Overlay */}
@@ -166,7 +163,6 @@ export default function FrontPageSection({ posts, title = "राजनीति
                                         fill
                                         sizes="100px"
                                         className="object-cover group-hover:scale-110 transition-transform duration-500"
-                                        unoptimized
                                     />
                                 </div>
                             )}

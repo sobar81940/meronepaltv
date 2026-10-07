@@ -107,7 +107,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
       // Webmaster Tools Verification
       verification: {
-        google: settings.seoSettings?.googleSiteVerification || undefined,
+        google: settings.seoSettings?.googleSiteVerification || "_MJLvjoQcmKVhzWjn5xJUtJqiUclqm6EXyMLtkUu1MA",
         other: settings.seoSettings?.bingSiteVerification ? {
           bing: settings.seoSettings.bingSiteVerification,
         } : undefined,
@@ -309,7 +309,9 @@ export default async function RootLayout({
 
         {/* Google Analytics (from site settings or NEXT_PUBLIC_GOOGLE_ANALYTICS) */}
         {(() => {
-          const gaId = seoSettings?.googleAnalyticsId || process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS;
+          const gaId = seoSettings?.googleAnalyticsId
+            || process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS
+            || "G-RHWREMTQ8L";
           if (!gaId) return null;
 
           return (

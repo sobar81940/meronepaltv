@@ -93,7 +93,6 @@ function ModernLightbox({
                             width={1600}
                             height={1000}
                             className="w-auto h-auto max-w-full max-h-[70vh] object-contain rounded-lg"
-                            unoptimized
                         />
                     </div>
                 ) : item.videoSource === "youtube" && item.youtubeId ? (
@@ -144,7 +143,6 @@ function ModernLightbox({
                                 alt=""
                                 fill
                                 className="object-cover"
-                                unoptimized
                             />
                         </button>
                     ))}
@@ -198,7 +196,6 @@ function VideoGallerySection({ videos }: { videos: Record<string, GalleryItem[]>
                             alt={featuredVideo.title}
                             fill
                             className="object-cover group-hover:scale-105 transition-transform duration-700"
-                            unoptimized
                         />
                         {/* Gradient overlay */}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
@@ -243,7 +240,6 @@ function VideoGallerySection({ videos }: { videos: Record<string, GalleryItem[]>
                                         alt={video.title}
                                         fill
                                         className="object-cover group-hover:scale-105 transition-transform duration-700"
-                                        unoptimized
                                     />
                                     {/* Play icon overlay */}
                                     <div className="absolute inset-0 flex items-center justify-center bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -398,7 +394,6 @@ function ImageGallerySectionComponent({ images }: { images: Record<string, Galle
                                     alt={image.title}
                                     fill
                                     className="object-cover transition-transform duration-500 group-hover:scale-105"
-                                    unoptimized
                                 />
 
                                 {/* Red Badge Icon */}

@@ -108,7 +108,6 @@ export default function ProvinceNewsSection({ posts }: ProvinceNewsSectionProps)
                                             fill
                                             sizes="(max-width: 768px) 100vw, 50vw"
                                             className="object-cover group-hover:scale-105 transition-transform duration-500"
-                                            unoptimized
                                         />
                                     ) : (
                                         <div className="w-full h-full bg-gray-200 flex items-center justify-center text-gray-400">No Image</div>
@@ -146,7 +145,6 @@ export default function ProvinceNewsSection({ posts }: ProvinceNewsSectionProps)
                                             fill
                                             sizes="(max-width: 768px) 100vw, 25vw"
                                             className="object-cover group-hover:scale-105 transition-transform duration-500"
-                                            unoptimized
                                         />
                                     ) : (
                                         <div className="w-full h-full bg-gray-200" />
@@ -172,7 +170,6 @@ export default function ProvinceNewsSection({ posts }: ProvinceNewsSectionProps)
                                                 fill
                                                 sizes="80px"
                                                 className="object-cover group-hover:scale-110 transition-transform duration-300"
-                                                unoptimized
                                             />
                                         </Link>
                                     )}
@@ -199,7 +196,6 @@ export default function ProvinceNewsSection({ posts }: ProvinceNewsSectionProps)
                                                 fill
                                                 sizes="96px"
                                                 className="object-cover group-hover:scale-110 transition-transform duration-300"
-                                                unoptimized
                                             />
                                         </Link>
                                     )}

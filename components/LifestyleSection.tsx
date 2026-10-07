@@ -75,7 +75,6 @@ export default function LifestyleSection({
                                             alt={colData.main.title}
                                             fill
                                             className="object-cover group-hover:scale-105 transition-transform duration-500"
-                                            unoptimized
                                         />
                                     </div>
                                 )}
@@ -96,7 +95,6 @@ export default function LifestyleSection({
                                                     fill
                                                     sizes="112px"
                                                     className="object-cover group-hover:scale-105 transition-transform duration-300"
-                                                    unoptimized
                                                 />
                                             </div>
                                         )}

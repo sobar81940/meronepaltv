@@ -61,9 +61,10 @@ export interface Post {
     videoUrl?: string | null; // Original news.video_url / video
     isHeadline?: boolean; // Show as headline on home page
     viewCount?: number; // Number of views
-    shareCount?: number; // Number of shares (default: 200, +20 per unique IP)
+    shareCount?: number; // Number of real shares
     visitorCount?: number; // Number of unique visitors tracked by IP
     sharedIPs?: string[]; // Array of IP addresses that have shared this post (track unique shares)
+    shareIPs?: string[]; // Array of IP addresses that have shared this post
     visitorIPs?: string[]; // Array of IP addresses that have visited this post
     readingTime?: number; // Estimated reading time in minutes
     socialShares?: {
@@ -113,4 +114,3 @@ export interface CreatePostInput {
         youtube: boolean;
     };
 }
-

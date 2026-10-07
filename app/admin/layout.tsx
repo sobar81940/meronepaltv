@@ -139,7 +139,7 @@ function AdminLayoutInner({
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [collapsed, setCollapsed] = useState(false);
     const [user, setUser] = useState<UserSession | null>(null);
-    const [expandedItems, setExpandedItems] = useState<string[]>(["/admin/settings"]);
+    const [expandedItems, setExpandedItems] = useState<string[]>([]);
 
     const [siteName, setSiteName] = useState("News Portal");
     const [logoUrl, setLogoUrl] = useState("");
