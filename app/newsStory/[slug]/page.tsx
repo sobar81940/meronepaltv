@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { X, ChevronUp, ChevronDown, Share2, Facebook, MessageCircle, ExternalLink } from "lucide-react";
 import ShareButtons from "@/components/ShareButtons";
+import { stripHtmlTags } from "@/lib/utils";
 
 interface StoryPost {
     _id: string;
@@ -172,12 +173,6 @@ export default function NewsStoryViewer() {
         );
     }
 
-    // Strip HTML tags from content for plain text display
-    const stripHtml = (html: string) => {
-        if (!html) return '';
-        return html.replace(/<[^>]*>/g, '').substring(0, 500);
-    };
-
     return (
         <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex flex-col lg:flex-row">
             {/* Close Button - Fixed position */}
@@ -266,7 +261,7 @@ export default function NewsStoryViewer() {
 
                         {/* Excerpt/Content */}
                         <div className="text-gray-700 dark:text-gray-300 text-base leading-relaxed mb-6">
-                            {currentStory.excerpt || stripHtml(currentStory.content || '')}
+                            {stripHtmlTags(currentStory.excerpt || currentStory.content || '')}
                         </div>
 
                         {/* Read Full News Link */}

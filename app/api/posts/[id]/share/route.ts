@@ -19,16 +19,8 @@ export async function POST(req: Request, context: { params: Promise<{ id: string
 
     const ip = getClientIPFromHeaders(req.headers) || req.headers.get('cf-connecting-ip') || null;
 
-    if (!location || (!location.lat && !location.lon)) {
-      return NextResponse.json({ success: false, message: 'Location required to register share' }, { status: 400 });
-    }
-
-    if (!ip) {
-      return NextResponse.json({ success: false, message: 'IP address not detected' }, { status: 400 });
-    }
-
     // `id` may be a slug or an ObjectId string; try to increment by slug first
-    const result = await PostModel.incrementShareCount(id, ip, location);
+    const result = await PostModel.incrementShareCount(id, ip || undefined, location);
 
     return NextResponse.json({ success: true, incremented: result.incremented });
   } catch (err) {

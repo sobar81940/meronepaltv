@@ -34,7 +34,7 @@ const getNavItems = (mediaBaseUrl: string): NavItem[] => [
         icon: (
             <div className="w-12 h-12 -mt-6 bg-white rounded-xl flex items-center justify-center shadow-lg border-4 border-white relative overflow-hidden z-10">
                 <Image
-                    src={`${mediaBaseUrl.replace(/\/+$/, "")}/news-portal/a52b1c80-ed7a-4db3-ab9a-62d11c9fb93a.png`}
+                    src="https://pub-b769d2cb60264fbb834dbed29f4b1007.r2.dev/news-portal/favicon-512-1790909520455.png"
                     alt="Shorts"
                     width={48}
                     height={48}

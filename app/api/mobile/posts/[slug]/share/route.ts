@@ -3,7 +3,7 @@ import PostModel from "@/models/Post";
 import { getClientIp, jsonError, jsonOk } from "@/lib/mobile";
 
 // POST /api/mobile/posts/[slug]/share
-// Increments the share counter (requires client IP + location for unique tracking)
+// Increments the share counter for each confirmed share action.
 export async function POST(request: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
     try {
         const { slug } = await params;
@@ -23,7 +23,7 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
             // No body - continue without location
         }
 
-        const result = await PostModel.incrementShareCount(slug, ip, location);
+        const result = await PostModel.incrementShareCount(slug, ip || undefined, location);
 
         return jsonOk(
             { slug, incremented: result.incremented },

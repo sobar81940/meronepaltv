@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { X, Play, Youtube, Facebook, ArrowRight } from "lucide-react";
+import { stripHtmlTags } from "@/lib/utils";
 
 interface ShortsPost {
     _id: string;
@@ -192,7 +193,7 @@ export default function ShortsFeed({ posts }: ShortsFeedProps) {
                                     </h3>
                                     {selectedPost.excerpt && (
                                         <p className="mt-4 text-sm md:text-base text-slate-300 leading-relaxed line-clamp-5">
-                                            {selectedPost.excerpt}
+                                            {stripHtmlTags(selectedPost.excerpt)}
                                         </p>
                                     )}
                                 </div>

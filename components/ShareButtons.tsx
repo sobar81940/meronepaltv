@@ -41,8 +41,6 @@ async function getLocation(timeout = 5000): Promise<{ lat: number; lon: number }
 async function recordShare(slug: string) {
   try {
     const location = await getLocation(5000);
-    // Require location to record share
-    if (!location) return { recorded: false };
 
     const res = await fetch(`/api/posts/${encodeURIComponent(slug)}/share`, {
       method: "POST",

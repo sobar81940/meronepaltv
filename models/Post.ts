@@ -379,20 +379,15 @@ export const PostModel = {
         return { ...post, _id: result.insertedId } as WithId<Post>;
     },
 
-    // Increment share count for a post based on unique IP and require location data
+    // Increment the share count for each confirmed social-share action.
     async incrementShareCount(slug: string, ipAddress?: string, location?: { lat?: number; lon?: number } | null): Promise<{ incremented: boolean }> {
         const collection = await getCollection();
 
-        if (!ipAddress || !location) {
-            // Missing required data: do not increment
-            return { incremented: false };
-        }
-
         const result = await collection.updateOne(
-            { slug, shareIPs: { $ne: ipAddress } },
+            { slug },
             {
                 $inc: { shareCount: SHARE_INCREMENT },
-                $addToSet: { shareIPs: ipAddress }
+                ...(ipAddress ? { $addToSet: { shareIPs: ipAddress } } : {}),
             }
         );
 
